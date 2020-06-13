@@ -1,0 +1,60 @@
+<div [@routerTransition]>
+  <div class="m-content">
+    <div class="m-portlet m-portlet__header m-portlet-mobile">
+      <div class="m-portlet__nav">
+        <ul>
+          <li><a routerLink="/app/admin/car-add"><i class="flaticon-add"></i>
+              Thêm mới</a></li>
+          <li><a [routerLink]="['/app/admin/car-edit']"><i class="flaticon-edit"></i> Chỉnh
+              sửa</a></li>
+          <li><a routerLink="/app/admin/car-sub"><i class="flaticon-edit"></i>Thanh lý</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="m-subheader">
+      <div class="d-flex align-items-center">
+        <div class="mr-auto col-xs-6">
+          <span class="m-section__sub m-section__sub--separator">
+            {{l("Trang chủ")}}
+          </span>
+          <span class="m-section__sub m-section__sub--separator active">
+            <a routerLink="/app/admin/car">{{l("Quản lý xe")}} {{currentUserName}}</a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- #region -->
+
+    <div class="ui-fluid p-formgrid p-grid">
+      <div class="p-field p-col-12 p-md-6">
+        <label for="firstname6">Firstname</label>
+        <input id="firstname6" type="text" pInputText>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <label for="lastname6">Lastname</label>
+        <input id="lastname6" type="text" pInputText>
+      </div>
+      <div class="p-field p-col-12">
+        <label for="address">Address</label>
+        <textarea id="address" type="text" rows="4" pInputTextarea></textarea>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <label for="city">City</label>
+        <input id="city" type="text" pInputText>
+      </div>
+      <div class="p-field p-col-12 p-md-3">
+        <label for="state">State</label>
+        <p-dropdown [options]="cities1" [(ngModel)]="selectedCity1" [filter]="true"></p-dropdown>
+      </div>
+      <div class="p-field p-col-12 p-md-3">
+        <label for="zip">Zip</label>
+        <input id="zip" type="text" pInputText>
+      </div>
+    </div>
+
+    <!-- #endregion -->
+
+  </div>
+</div>

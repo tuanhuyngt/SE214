@@ -1,0 +1,33 @@
+<div [@routerTransition]>
+  <div class="m-content">
+    <div class="m-portlet m-portlet__header m-portlet-mobile">
+      <div class="m-portlet__nav">
+        <ul>
+          <li><a routerLink="/app/admin/dx-car-add"><i class="flaticon-add"></i>
+              Thêm mới</a></li>
+          <li><a [routerLink]="['/app/admin/dx-car-edit']"><i class="flaticon-edit"></i> Chỉnh
+              sửa / Xóa</a></li>
+          <li><a routerLink="/app/admin/dx-car-pd"><i class="flaticon-edit"></i>Phê duyệt</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="m-subheader">
+      <div class="d-flex align-items-center">
+        <div class="mr-auto col-xs-6">
+          <span class="m-section__sub m-section__sub--separator">
+            {{l("Trang chủ")}}
+          </span>
+          <span class="m-section__sub m-section__sub--separator active">
+            <a routerLink="/app/admin/dx-cars">{{l("Quản lý đề xuất xe")}} {{currentUserName}}</a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- #region -->
+    Code here
+    <!-- #endregion -->
+
+  </div>
+</div>
