@@ -1,6 +1,8 @@
+import { DriverAddComponent } from './drivers/driver-add/driver-add.component';
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CarComponent } from "./cars/car/car.component";
+import { DriverComponent} from "./drivers/driver/driver.component"
 import { ModelCarComponent } from "./model-cars/model-car/model-car.component";
 import { NewCarsComponent } from "./new-cars/new-cars/new-cars.component";
 import { CarAddComponent } from "./cars/car-add/car-add.component";
@@ -57,6 +59,12 @@ import { NewCarsSearchComponent } from "./new-cars/new-cars-search/new-cars-sear
                     {
                         path: 'dx-car-pd', component: NewCarsSearchComponent
                     },
+                    {
+                        path: 'driver', component: DriverComponent
+                    },
+                    {
+                        path: 'driver-add', component: DriverAddComponent
+                    }
                 ],
             },
         ]),

@@ -1,0 +1,17 @@
+.m-portlet__body {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.group-2.m-portlet.m-portlet-mobile {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.table-checkbox {
+    width: 50px !important;
+}
+
+.m-radio {
+    padding-top: 5px !important;
+}
