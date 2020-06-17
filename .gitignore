@@ -54,6 +54,4 @@ Release/
 project.assets.json
 obj
 Debug
-Backend/src/GSoft.AbpZeroTemplate.Core.Shared/Helpers/ProcedureHelper.cs
-Backend/src/GSoft.AbpZeroTemplate.Web.Host/appsettings.json
 App_Data/
