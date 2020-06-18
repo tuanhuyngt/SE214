@@ -1,3 +1,6 @@
+import { DriverSearchComponent } from './drivers/driver-search/driver-search.component';
+import { DriverDelComponent } from './drivers/driver-del/driver-del.component';
+import { DriverEditComponent } from './drivers/driver-edit/driver-edit.component';
 import { DriverAddComponent } from './drivers/driver-add/driver-add.component';
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
@@ -64,6 +67,15 @@ import { NewCarsSearchComponent } from "./new-cars/new-cars-search/new-cars-sear
                     },
                     {
                         path: 'driver-add', component: DriverAddComponent
+                    },
+                    {
+                        path: 'driver-edit', component: DriverEditComponent
+                    },
+                    {
+                        path: 'driver-del', component: DriverDelComponent
+                    },
+                    {
+                        path: 'driver-search', component: DriverSearchComponent
                     },
 
                 ],
