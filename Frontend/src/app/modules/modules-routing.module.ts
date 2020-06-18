@@ -64,7 +64,8 @@ import { NewCarsSearchComponent } from "./new-cars/new-cars-search/new-cars-sear
                     },
                     {
                         path: 'driver-add', component: DriverAddComponent
-                    }
+                    },
+
                 ],
             },
         ]),

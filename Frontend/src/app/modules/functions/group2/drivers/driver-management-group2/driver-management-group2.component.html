@@ -11,8 +11,8 @@
                     </li>
                     <!-- *ngIf="isGranted('Pages.Group0.Car.Update')" -->
                     <li>
-                        <a [class.disabled]="!curCarTypeId"
-                            [routerLink]="['/app/admin/driver-edit', {id : curCarTypeId}]">
+                        <a [class.disabled]="!driverId"
+                            [routerLink]="['/app/admin/driver-edit', {id : driverId}]">
                             <i class="flaticon-edit"></i> Chỉnh sửa
                         </a>
                     </li>
@@ -24,7 +24,7 @@
                     </li>
                     <!-- *ngIf="isGranted('Pages.Group4.Car.Delete')" -->
                     <li>
-                        <span (click)="delete()" [class.disabled]="!curCarTypeId">
+                        <span (click)="delete()" [class.disabled]="!driverId">
                             <i class="flaticon-edit"></i> Xóa
                         </span>
                     </li>
@@ -54,28 +54,12 @@
                     <div class="col-md-6">
                         <label for="loaiXe_NamSX">Tên tài xế</label>
                         <div class="form-group">
-                            <input id="loaiXe_DinhMucNhienLieu" #loaiXe_DinhMucNhienLieu="ngModel" class="ui-inputtext ui-widget ui-state-default form-control"
-                                type="text" name="loaiXe_DinhMucNhienLieu"
-                                [(ngModel)]="carTypeInput.loaiXe_DinhMucNhienLieu" maxlength="20">
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <label for="loaiXe_Hang">Hạng bằng lái</label>
-                        <div class="form-group">
-                            <p-autoComplete [(ngModel)]="carManufacturerOpt" id="loaiXe_Hang"
-                                [suggestions]="carManufacturerSuggestions"
-                                (completeMethod)="filterCarManufacturerOpt($event)"
-                                (onClear)="clearOption(CAR_TYPE_MANUFACTURER)" [forceSelection]="true" [dropdown]="true"
-                                field="name" placeholder="Hãng xe tên" [minLength]="1" name="loaiXe_Hang">
-                            </p-autoComplete>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <label for="loaiXe_Ten">Mã hợp đồng</label>
-                        <div class="form-group">
-                            <input class="ui-inputtext ui-widget ui-state-default ui-corner-all ui-autocomplete-input ng-star-inserted" type="text"/>
+                            <input id="driver_search" class="ui-inputtext ui-widget ui-state-default form-control"
+                                type="text" name="driver_search"
+                                maxlength="20"
+                                [(ngModel)] = "driverName"
+                                (ngModelChange)="onChangeSearch()"
+                                >
                         </div>
                     </div>
                 </div>
@@ -96,10 +80,10 @@
                                 <th class="table-checkbox">
                                    
                                 </th>
-                                <th>
+                                <th class = "th-STT">
                                     STT
                                 </th>
-                                <th>
+                                <th class = "th-MaTaiXe">
                                     Mã tài xế
                                 </th>
                                 <th>
@@ -109,13 +93,10 @@
                                     Hạng bằng lái
                                 </th>
                                 <th>
-                                    Mã hợp đồng
-                                </th>
-                                <th>
-                                    Ngày bắt đầu làm
-                                </th>
-                                <th>
                                     Mức lương
+                                </th>
+                                <th>
+                                    Trạng thái làm việc
                                 </th>
                                 
                             </tr>
@@ -125,7 +106,7 @@
                             <tr>
                                 <td>
                                     <label class="m-radio" for="Theme_Default-{{record.ma}}">
-                                        <input id="Theme_Default-{{record.ma}}" name="Theme" [(ngModel)]="curCarTypeId"
+                                        <input id="Theme_Default-{{record.ma}}" name="Theme" [(ngModel)]="driverId"
                                             value="{{record.ma}}" type="radio">
                                         <span></span>
                                     </label>
@@ -137,19 +118,16 @@
                                     <span>{{record.ma}}</span>
                                 </td>
                                 <td>
-                                    <span>{{record.loaiXe_Ten}}</span>
+                                    <span>{{record.taiXe_HoTen}}</span>
                                 </td>
                                 <td>
-                                    <span>{{record.loaiXe_Hang}}</span>
+                                    <span>{{record.taiXe_HangBangLai}}</span>
                                 </td>
                                 <td>
-                                    <span>{{record.loaiXe_SoLuong}}</span>
+                                    <span>{{record.hopDong_MucLuong | currency :'VND' : true}}</span>
                                 </td>
                                 <td>
-                                    <span>{{record.loaiXe_NamSX}}</span>
-                                </td>
-                                <td>
-                                    <span>{{record.loaiXe_LoaiNhienLieu === "X" ? "Xăng" : "Dầu"}}</span>
+                                    <span>{{record.taiXe_TrangThaiLamViec == 'D' ? 'Làm việc' : 'Nghỉ'}}</span>
                                 </td>
                                 
                             </tr>
