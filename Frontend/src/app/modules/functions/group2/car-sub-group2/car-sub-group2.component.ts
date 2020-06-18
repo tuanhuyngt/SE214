@@ -44,6 +44,8 @@ export class CarSubGroup2Component extends AppComponentBase implements OnInit {
         );
     }
 
+    
+
     xacNhan() {
         this.xeThanhLy.thanhLy_MaXe = this.xeSearch.ma;
         this.xeThanhLy.thanhLy_NguoiTao = this.currentUserName;

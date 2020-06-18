@@ -37,6 +37,12 @@ export class AppNavigationService {
                     "flaticon-plus",
                     "/app/admin/dx-cars"
                 ),
+                new AppMenuItem(
+                    "Quản lý tài xế",
+                    "Pages.Group0.Car",
+                    "flaticon-transport",
+                    "/app/admin/driver"
+                ),
             ]),
             new AppMenuItem('Systems', '', 'flaticon-layers', '', [
                 new AppMenuItem('OrganizationUnits', 'Pages.Administration.OrganizationUnits', 'flaticon-map', '/app/admin/organization-units'),

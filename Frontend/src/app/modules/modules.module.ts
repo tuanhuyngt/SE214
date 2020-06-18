@@ -16,6 +16,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ModulesRoutingModule } from "./modules-routing.module";
 import { ModulesServiceProxyModule } from "./modules.service-proxy.module";
 import { CarsModule } from './cars/cars.module';
+import { DriversModule } from './drivers/drivers.module';
 import { ModelCarsModule } from './model-cars/model-cars.module';
 import { NewCarsModule } from './new-cars/new-cars.module';
 import { RouterModule } from "@angular/router";
@@ -35,7 +36,8 @@ import { FunctionsModule } from './functions/functions.module';
         ModelCarsModule,
         NewCarsModule,
         RouterModule,
-        FunctionsModule
+        FunctionsModule,
+        DriversModule
     ],
     declarations: [
     ],
