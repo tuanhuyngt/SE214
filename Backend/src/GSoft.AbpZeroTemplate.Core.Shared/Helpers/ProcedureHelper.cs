@@ -19,7 +19,11 @@ namespace GSoft.AbpZeroTemplate.Helpers
         private readonly string connectionString;
         public ProcedureHelper()
         {
+<<<<<<< HEAD
             connectionString = "Server=DESKTOP-4AIJSAF; Database=DbPratice; Trusted_Connection=True;";
+=======
+            connectionString = "Server=.; Database=DbPratice; Trusted_Connection=True;";
+>>>>>>> backend
         }
 
         private List<ProcedureParamInfo> GetParamInfos(IDbConnection conn, string procedureName)
