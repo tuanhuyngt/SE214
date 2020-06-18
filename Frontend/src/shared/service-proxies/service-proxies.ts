@@ -3442,6 +3442,133 @@ export class Group1EditLXServiceProxy {
 }
 
 @Injectable()
+export class Group2TaiXeServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    /**
+     * @ma (optional) 
+     * @return Success
+     */
+    tAIXE_Group2SearchById(ma: number | null | undefined): Observable<Group2TaiXeSearchByIdDto> {
+        let url_ = this.baseUrl + "/api/Group2TaiXe/TAIXE_Group2SearchById?";
+        if (ma !== undefined)
+            url_ += "Ma=" + encodeURIComponent("" + ma) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processTAIXE_Group2SearchById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processTAIXE_Group2SearchById(<any>response_);
+                } catch (e) {
+                    return <Observable<Group2TaiXeSearchByIdDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<Group2TaiXeSearchByIdDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processTAIXE_Group2SearchById(response: HttpResponseBase): Observable<Group2TaiXeSearchByIdDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? Group2TaiXeSearchByIdDto.fromJS(resultData200) : new Group2TaiXeSearchByIdDto();
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<Group2TaiXeSearchByIdDto>(<any>null);
+    }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    tAIXE_Group2Search(input: Group2TaiXeSearchInputDto | null | undefined): Observable<Group2TaiXeSearchDto[]> {
+        let url_ = this.baseUrl + "/api/Group2TaiXe/TAIXE_Group2Search";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processTAIXE_Group2Search(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processTAIXE_Group2Search(<any>response_);
+                } catch (e) {
+                    return <Observable<Group2TaiXeSearchDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<Group2TaiXeSearchDto[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processTAIXE_Group2Search(response: HttpResponseBase): Observable<Group2TaiXeSearchDto[]> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200 && resultData200.constructor === Array) {
+                result200 = [];
+                for (let item of resultData200)
+                    result200.push(Group2TaiXeSearchDto.fromJS(item));
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<Group2TaiXeSearchDto[]>(<any>null);
+    }
+}
+
+@Injectable()
 export class Group2ThanhLyServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -14141,6 +14268,178 @@ export interface IGroup1LoaiXeDto {
     loaiXe_NgayTao: moment.Moment | undefined;
     loaiXe_NguoiTao: string | undefined;
     loaiXe_LoaiNhienLieu: string | undefined;
+}
+
+export class Group2TaiXeSearchByIdDto implements IGroup2TaiXeSearchByIdDto {
+    ma!: number | undefined;
+    taiXe_HoTen!: string | undefined;
+    taiXe_HangBangLai!: string | undefined;
+    taiXe_TrangThaiLamViec!: string | undefined;
+    hopDong_NgayBatDauLam!: moment.Moment | undefined;
+    hopDong_MucLuong!: number | undefined;
+
+    constructor(data?: IGroup2TaiXeSearchByIdDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.ma = data["ma"];
+            this.taiXe_HoTen = data["taiXe_HoTen"];
+            this.taiXe_HangBangLai = data["taiXe_HangBangLai"];
+            this.taiXe_TrangThaiLamViec = data["taiXe_TrangThaiLamViec"];
+            this.hopDong_NgayBatDauLam = data["hopDong_NgayBatDauLam"] ? moment(data["hopDong_NgayBatDauLam"].toString()) : <any>undefined;
+            this.hopDong_MucLuong = data["hopDong_MucLuong"];
+        }
+    }
+
+    static fromJS(data: any): Group2TaiXeSearchByIdDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new Group2TaiXeSearchByIdDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["ma"] = this.ma;
+        data["taiXe_HoTen"] = this.taiXe_HoTen;
+        data["taiXe_HangBangLai"] = this.taiXe_HangBangLai;
+        data["taiXe_TrangThaiLamViec"] = this.taiXe_TrangThaiLamViec;
+        data["hopDong_NgayBatDauLam"] = this.hopDong_NgayBatDauLam ? this.hopDong_NgayBatDauLam.toISOString() : <any>undefined;
+        data["hopDong_MucLuong"] = this.hopDong_MucLuong;
+        return data; 
+    }
+}
+
+export interface IGroup2TaiXeSearchByIdDto {
+    ma: number | undefined;
+    taiXe_HoTen: string | undefined;
+    taiXe_HangBangLai: string | undefined;
+    taiXe_TrangThaiLamViec: string | undefined;
+    hopDong_NgayBatDauLam: moment.Moment | undefined;
+    hopDong_MucLuong: number | undefined;
+}
+
+export class Group2TaiXeSearchInputDto implements IGroup2TaiXeSearchInputDto {
+    taiXe_Ma!: number | undefined;
+    taiXe_HoTen!: string | undefined;
+    taiXe_TrangThaiLamViec!: string | undefined;
+    taiXe_HangBangLai!: string | undefined;
+    taiXe_NgayBatDauLam!: moment.Moment | undefined;
+    taiXe_MucLuongNho!: number | undefined;
+    taiXe_MucLuongLon!: number | undefined;
+
+    constructor(data?: IGroup2TaiXeSearchInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.taiXe_Ma = data["taiXe_Ma"];
+            this.taiXe_HoTen = data["taiXe_HoTen"];
+            this.taiXe_TrangThaiLamViec = data["taiXe_TrangThaiLamViec"];
+            this.taiXe_HangBangLai = data["taiXe_HangBangLai"];
+            this.taiXe_NgayBatDauLam = data["taiXe_NgayBatDauLam"] ? moment(data["taiXe_NgayBatDauLam"].toString()) : <any>undefined;
+            this.taiXe_MucLuongNho = data["taiXe_MucLuongNho"];
+            this.taiXe_MucLuongLon = data["taiXe_MucLuongLon"];
+        }
+    }
+
+    static fromJS(data: any): Group2TaiXeSearchInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new Group2TaiXeSearchInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["taiXe_Ma"] = this.taiXe_Ma;
+        data["taiXe_HoTen"] = this.taiXe_HoTen;
+        data["taiXe_TrangThaiLamViec"] = this.taiXe_TrangThaiLamViec;
+        data["taiXe_HangBangLai"] = this.taiXe_HangBangLai;
+        data["taiXe_NgayBatDauLam"] = this.taiXe_NgayBatDauLam ? this.taiXe_NgayBatDauLam.toISOString() : <any>undefined;
+        data["taiXe_MucLuongNho"] = this.taiXe_MucLuongNho;
+        data["taiXe_MucLuongLon"] = this.taiXe_MucLuongLon;
+        return data; 
+    }
+}
+
+export interface IGroup2TaiXeSearchInputDto {
+    taiXe_Ma: number | undefined;
+    taiXe_HoTen: string | undefined;
+    taiXe_TrangThaiLamViec: string | undefined;
+    taiXe_HangBangLai: string | undefined;
+    taiXe_NgayBatDauLam: moment.Moment | undefined;
+    taiXe_MucLuongNho: number | undefined;
+    taiXe_MucLuongLon: number | undefined;
+}
+
+export class Group2TaiXeSearchDto implements IGroup2TaiXeSearchDto {
+    ma!: number | undefined;
+    taiXe_HoTen!: string | undefined;
+    taiXe_TrangThaiLamViec!: string | undefined;
+    taiXe_HangBangLai!: string | undefined;
+    hopDong_MucLuong!: number | undefined;
+    hopDong_NgayBatDauLam!: moment.Moment | undefined;
+
+    constructor(data?: IGroup2TaiXeSearchDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.ma = data["ma"];
+            this.taiXe_HoTen = data["taiXe_HoTen"];
+            this.taiXe_TrangThaiLamViec = data["taiXe_TrangThaiLamViec"];
+            this.taiXe_HangBangLai = data["taiXe_HangBangLai"];
+            this.hopDong_MucLuong = data["hopDong_MucLuong"];
+            this.hopDong_NgayBatDauLam = data["hopDong_NgayBatDauLam"] ? moment(data["hopDong_NgayBatDauLam"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): Group2TaiXeSearchDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new Group2TaiXeSearchDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["ma"] = this.ma;
+        data["taiXe_HoTen"] = this.taiXe_HoTen;
+        data["taiXe_TrangThaiLamViec"] = this.taiXe_TrangThaiLamViec;
+        data["taiXe_HangBangLai"] = this.taiXe_HangBangLai;
+        data["hopDong_MucLuong"] = this.hopDong_MucLuong;
+        data["hopDong_NgayBatDauLam"] = this.hopDong_NgayBatDauLam ? this.hopDong_NgayBatDauLam.toISOString() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface IGroup2TaiXeSearchDto {
+    ma: number | undefined;
+    taiXe_HoTen: string | undefined;
+    taiXe_TrangThaiLamViec: string | undefined;
+    taiXe_HangBangLai: string | undefined;
+    hopDong_MucLuong: number | undefined;
+    hopDong_NgayBatDauLam: moment.Moment | undefined;
 }
 
 export class Group2SearchDto implements IGroup2SearchDto {
