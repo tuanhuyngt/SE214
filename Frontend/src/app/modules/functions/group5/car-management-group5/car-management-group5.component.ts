@@ -3,11 +3,8 @@ import { AppComponentBase } from '@shared/common/app-component-base';
 import { environment } from 'environments/environment';
 import { Table } from "primeng/components/table/table";
 import { Paginator, SelectItem } from "primeng/primeng";
-
-interface City {
-  name: string;
-  code: string;
-}
+import { Group5XeServiceProxy, Group5XeDto } from '@shared/service-proxies/service-proxies';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -19,31 +16,84 @@ interface City {
 export class CarManagementGroup5Component extends AppComponentBase implements OnInit {
 
   currentId: number;
-  cities1: SelectItem[];
+  cars: Group5XeDto[] = [];
+  currentUserName: string;
 
-  cities2: City[];
-
-  selectedCity1: City;
-
-  selectedCity2: City;
+  formSearch: FormGroup;
+  submitted = false;
 
   @ViewChild("dataTable") dataTable: Table;
   @ViewChild("paginator") paginator: Paginator;
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector, private group5Proxy: Group5XeServiceProxy, private formBuilder: FormBuilder) {
     super(injector);
+    this.currentUserName = this.appSession.user.userName;
   }
 
   ngOnInit() {
+    this.getListCar();
 
-    this.cities1 = [
-      { label: 'Select City', value: null },
-      { label: 'New York', value: { id: 1, name: 'New York', code: 'NY' } },
-      { label: 'Rome', value: { id: 2, name: 'Rome', code: 'RM' } },
-      { label: 'London', value: { id: 3, name: 'London', code: 'LDN' } },
-      { label: 'Istanbul', value: { id: 4, name: 'Istanbul', code: 'IST' } },
-      { label: 'Paris', value: { id: 5, name: 'Paris', code: 'PRS' } }
-    ];
+    this.formSearch = this.formBuilder.group({
+      id: [''],
+      carNumber: ['', Validators.pattern(/^([0-9]){2} + ([A-Z]){1,2} + - + ([0-9]){4,5}$/)],
+      type: [''],
+      brand: ['']
+    });
+  }
+
+  get f() { return this.formSearch.controls; }
+
+  getListCar() {
+    this.group5Proxy.xe_Group5DisplayVehicles().subscribe(
+      response => {
+        if (response["Result"] === "-1") {
+          this.notify.error(response["ErrorDesc"]);
+        } else {
+
+          this.cars = response;
+
+          this.primengTableHelper.totalRecordsCount = response.length;
+          this.primengTableHelper.records = response;
+          this.primengTableHelper.hideLoadingIndicator();
+
+          console.log(this.cars)
+        }
+      }
+    );
+  }
+
+  search() {
+    this.submitted = true;
+    if (this.formSearch.invalid) {
+      return;
+    }
+
+    if (this.formSearch.value.id === "" && this.formSearch.value.carNumber === ""
+      && this.formSearch.value.type === ""
+      && this.formSearch.value.brand === "") {
+      this.getListCar();
+      return;
+    }
+
+    this.group5Proxy.xE_Group5SearchById(this.formSearch.value.id).subscribe(
+      response => {
+        if (response["Result"] === "-1") {
+          this.notify.error(response["ErrorDesc"]);
+        } else {
+
+          this.cars = [];
+
+          this.cars.push(response)
+
+          this.primengTableHelper.totalRecordsCount = 1;
+          this.primengTableHelper.records = this.cars;
+          this.primengTableHelper.hideLoadingIndicator();
+
+          console.log(this.cars)
+        }
+      }
+    )
+
   }
 
 

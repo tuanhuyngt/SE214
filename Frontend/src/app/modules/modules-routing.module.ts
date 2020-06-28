@@ -1,8 +1,6 @@
-import { DriverAddComponent } from './drivers/driver-add/driver-add.component';
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CarComponent } from "./cars/car/car.component";
-import { DriverComponent} from "./drivers/driver/driver.component"
 import { ModelCarComponent } from "./model-cars/model-car/model-car.component";
 import { NewCarsComponent } from "./new-cars/new-cars/new-cars.component";
 import { CarAddComponent } from "./cars/car-add/car-add.component";
@@ -13,6 +11,11 @@ import { ModelCarEditComponent } from "./model-cars/model-car-edit/model-car-edi
 import { NewCarsAddComponent } from "./new-cars/new-cars-add/new-cars-add.component";
 import { NewCarsEditComponent } from "./new-cars/new-cars-edit/new-cars-edit.component";
 import { NewCarsSearchComponent } from "./new-cars/new-cars-search/new-cars-search.component";
+import { DriverComponent } from "./drivers/driver/driver.component";
+import { DriverAddComponent } from "./drivers/driver-add/driver-add.component";
+import { DriverEditComponent } from "./drivers/driver-edit/driver-edit.component";
+import { DriverDelComponent } from "./drivers/driver-del/driver-del.component";
+import { DriverSearchComponent } from "./drivers/driver-search/driver-search.component";
 
 @NgModule({
     imports: [
@@ -64,7 +67,16 @@ import { NewCarsSearchComponent } from "./new-cars/new-cars-search/new-cars-sear
                     },
                     {
                         path: 'driver-add', component: DriverAddComponent
-                    }
+                    },
+                    {
+                        path: 'driver-edit', component: DriverEditComponent
+                    },
+                    {
+                        path: 'driver-del', component: DriverDelComponent
+                    },
+                    {
+                        path: 'driver-search', component: DriverSearchComponent
+                    },
                 ],
             },
         ]),

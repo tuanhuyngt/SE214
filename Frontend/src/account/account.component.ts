@@ -61,7 +61,8 @@ export class AccountComponent extends AppComponentBase implements OnInit {
     }
 
     getBgUrl(): string {
-        return 'url(./assets/metronic/dist/html/' + this.ui.getTheme() + '/assets/demo/' + this.ui.getTheme() +'/media/img/bg/bg-4.jpg)';
+        // return 'url(./assets/metronic/dist/html/' + this.ui.getTheme() + '/assets/demo/' + this.ui.getTheme() +'/media/img/bg/UIT.png)';
+        return './assets/metronic/dist/html/' + this.ui.getTheme() + '/assets/demo/' + this.ui.getTheme() +'/media/img/bg/UIT.png';
     }
 
     private supportsTenancyNameInUrl() {

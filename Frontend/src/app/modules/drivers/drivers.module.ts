@@ -1,3 +1,4 @@
+import { DriverSearchComponent } from './driver-search/driver-search.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DriverComponent } from './driver/driver.component';
@@ -20,6 +21,6 @@ import { FunctionsModule } from '../functions/functions.module';
     CheckboxModule,
     FunctionsModule
   ],
-  declarations: [DriverComponent, DriverAddComponent, DriverDelComponent, DriverEditComponent]
+  declarations: [DriverComponent, DriverAddComponent, DriverDelComponent, DriverEditComponent, DriverSearchComponent]
 })
 export class DriversModule { }

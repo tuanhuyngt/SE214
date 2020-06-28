@@ -6,12 +6,12 @@ import { AbpHttpInterceptor } from "abp-ng2-module/dist/src/abpHttpInterceptor";
 @NgModule({
     providers: [
         ApiServiceProxies.Group2ThanhLyServiceProxy, 
+        ApiServiceProxies.Group2TaiXeServiceProxy,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AbpHttpInterceptor,
             multi : true
         },
-
     ]
 })
 
