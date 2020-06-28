@@ -27,12 +27,15 @@ namespace Group2.AbpZeroTemplate.Application
       var Group2 = pages.CreateChildPermission("Pages.Group2", L("Group2"));
 
 
-      var demoModels = pages.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Car, L("Car"));
-      demoModels.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Car_Add, L("Create"));
-      demoModels.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Car_Update, L("Edit"));
-      demoModels.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Car_View, L("View"));
-      demoModels.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Car_Delete, L("Delete"));
-      demoModels.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Car_Approve, L("Approve"));
+      var group2ThanhLy = pages.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2ThanhLy, L("Group2ThanhLy"));
+      group2ThanhLy.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2ThanhLy_Insert, L("Insert"));
+
+      var group2TaiXe = pages.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2TaiXe, L("Group2TaiXe"));
+      group2TaiXe.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2TaiXe_Insert, L("Insert"));
+      group2TaiXe.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2TaiXe_Search, L("Search"));
+      group2TaiXe.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2TaiXe_Delete, L("Delete"));
+      group2TaiXe.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2TaiXe_Update, L("Update"));
+      group2TaiXe.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2TaiXe_QuickUpdate, L("Quick Update"));
     }
 
     private static ILocalizableString L(string name)

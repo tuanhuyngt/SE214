@@ -23,6 +23,11 @@ namespace Group2.AbpZeroTemplate.Application.Controllers
             this.Group2TaiXeAppService = Group2TaiXeAppService;
         }
         [HttpPost]
+        public IDictionary<string, object> TAIXE_Group2Insert([FromBody]Group2TaiXeInsertInputDto input)
+        {
+            return Group2TaiXeAppService.TAIXE_Group2Insert(input);
+        }
+        [HttpPost]
         public Group2TaiXeSearchByIdDto TAIXE_Group2SearchById(int Ma)
         {
             return Group2TaiXeAppService.TAIXE_Group2SearchById(Ma);
@@ -31,6 +36,21 @@ namespace Group2.AbpZeroTemplate.Application.Controllers
         public List<Group2TaiXeSearchDto> TAIXE_Group2Search([FromBody]Group2TaiXeSearchInputDto input)
         {
             return Group2TaiXeAppService.TAIXE_Group2Search(input);
+        }
+        [HttpPost]
+        public IDictionary<string, object> TAIXE_Group2Del(int Ma)
+        {
+            return Group2TaiXeAppService.TAIXE_Group2Del(Ma);
+        }
+        [HttpPost]
+        public IDictionary<string, object> TAIXE_Group2QuickUpdate([FromBody]Group2TaiXeQuickUpdateInputDto input)
+        {
+            return Group2TaiXeAppService.TAIXE_Group2QuickUpdate(input);
+        }
+        [HttpPost]
+        public IDictionary<string, object> TAIXE_Group2Update([FromBody] Group2TaiXeUpdateInputDto input)
+        {
+            return Group2TaiXeAppService.TAIXE_Group2Update(input);
         }
     }
 }

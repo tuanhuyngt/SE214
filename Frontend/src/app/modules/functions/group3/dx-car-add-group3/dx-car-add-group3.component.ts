@@ -52,6 +52,10 @@ export class DxCarAddGroup3Component extends AppComponentBase implements OnInit 
       this.notify.error(this.l("Vui lòng nhập tên xe", "ERROR", environment.opt));
       return false;
     }
+    if (this.manufacturer == null || this.manufacturer == '' || !!this.manufacturer.match(/a-zA-Z0-9/i)) {
+      this.notify.error(this.l("Vui lòng nhập hãng xe", "ERROR", environment.opt));
+      return false;
+    }
     if (this.color == null || this.color == '') {
       this.notify.error(this.l("Vui lòng nhập màu xe", "ERROR", environment.opt));
       return false;
@@ -64,8 +68,12 @@ export class DxCarAddGroup3Component extends AppComponentBase implements OnInit 
       this.notify.error(this.l("Vui lòng nhập mục đích", "ERROR", environment.opt));
       return false;
     }
-    if (this.amount == null || Number.isInteger(this.amount) || this.amount <= 1) {
+    if (this.amount == null  || this.amount < 1) {
       this.notify.error(this.l("Vui lòng nhập số lượng phù hợp (> 1)", "ERROR", environment.opt));
+      return false;
+    }
+    if (this.manuYear == null || this.manuYear <= 1886 || this.manuYear > new Date().getFullYear()) {
+      this.notify.error(this.l(`Vui lòng nhập năm phù hợp (1886 < năm < ${new Date().getFullYear()})`, "ERROR", environment.opt));
       return false;
     }
     if (this.saler.includes(null)) {
@@ -85,8 +93,7 @@ export class DxCarAddGroup3Component extends AppComponentBase implements OnInit 
 
   onSubmit(f: NgForm) {
     this.setValue();
-    console.log(this.group3DeXuatAddInput);
-    console.log(this.group3BangGiaAddInput);
+
     if (this.checkInputValue() == false) return;
 
     this.group3DeXuatService.deXuat_Group3Insert(this.group3DeXuatAddInput).subscribe((response) => {
@@ -97,18 +104,17 @@ export class DxCarAddGroup3Component extends AppComponentBase implements OnInit 
       } else {
         this.notify.info(this.l("Thêm đề xuất xe thành công"));
       }
+      this.group3BangGiaService.bangGia_Group3Insert(this.group3BangGiaAddInput).subscribe((response) => {
+        if (response["Result"] == "1") {
+          this.notify.error(this.l("Thêm bảng giá thất bại", "ERROR", environment.opt));
+          this.cancel();
+          window.location.reload();
+        } else {
+          this.notify.info(this.l("Thêm bảng giá thành công"));
+        }
+      });
     });
-
-    this.group3BangGiaService.bangGia_Group3Insert(this.group3BangGiaAddInput).subscribe((response) => {
-      if (response["Result"] == "1") {
-        this.notify.error(this.l("Thêm bảng giá thất bại", "ERROR", environment.opt));
-        this.cancel();
-        window.location.reload();
-      } else {
-        this.notify.info(this.l("Thêm bảng giá thành công"));
-      }
-    });
-  }
+  }                 
 
   addPriceItem() {
     this.recommendPrices.push({ price: null, saler: null });
@@ -127,6 +133,7 @@ export class DxCarAddGroup3Component extends AppComponentBase implements OnInit 
   }
 
   ngOnInit() {
+    this.amount = 1;
   }
 
 }

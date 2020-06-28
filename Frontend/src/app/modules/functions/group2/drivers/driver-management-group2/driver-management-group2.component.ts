@@ -1,5 +1,7 @@
+import { environment } from 'environments/environment';
 import { Group2TaiXeSearchInputDto } from '@shared/service-proxies/service-proxies';
 import { Group2TaiXeServiceProxy } from '@shared/service-proxies/service-proxies';
+
 import {
     Component,
     ViewChild,
@@ -57,9 +59,29 @@ export class DriverManagementGroup2Component extends AppComponentBase implements
 
 
     delete() {
+        let self = this;
+        self.message.confirm(
+            self.l('Xác nhận xóa tài xế', this.driverId),
+            this.l(''),
+            isConfirmed => {
+                if (isConfirmed) {
+                    this.Group2TaiXeServiceProxy.tAIXE_Group2Del(this.driverId).subscribe((response) => {
+                        if (response["Result"] === "1") {
+                            this.notify.error("Xóa tài xế thất bại", "ERROR", environment.opt);
+                        } else {
+                            this.notify.success("Xóa tài xế thành công", "SUCCESS", environment.opt);
+                            this.resetOptions();
+                            this.driverId = null;
+                            this.search();
+                        }
+                    });
+                }
+            }
+        );
     }
-
+   
     search() {
+        this.driverInput.taiXe_TrangThaiLamViec = 'D';
         this.primengTableHelper.showLoadingIndicator();
         this.Group2TaiXeServiceProxy.tAIXE_Group2Search(this.driverInput)
             .subscribe((result) => {
@@ -74,6 +96,7 @@ export class DriverManagementGroup2Component extends AppComponentBase implements
             });
     }
     onSearch() {
+        this.driverInput.taiXe_TrangThaiLamViec = 'D';
         this.primengTableHelper.showLoadingIndicator();
         this.Group2TaiXeServiceProxy.tAIXE_Group2Search(this.driverInput)
             .subscribe((result) => {

@@ -17,6 +17,10 @@ namespace Group2.AbpZeroTemplate.Web.Core.Cars
     {
         Group2TaiXeSearchByIdDto TAIXE_Group2SearchById(int Ma);
         List<Group2TaiXeSearchDto> TAIXE_Group2Search(Group2TaiXeSearchInputDto input);
+        IDictionary<string, object> TAIXE_Group2Insert(Group2TaiXeInsertInputDto input);
+        IDictionary<string, object> TAIXE_Group2Del(int Ma);
+        IDictionary<string, object> TAIXE_Group2QuickUpdate(Group2TaiXeQuickUpdateInputDto input);
+        IDictionary<string, object> TAIXE_Group2Update(Group2TaiXeUpdateInputDto input);
 
     }
     public class Group2TaiXeAppService : BaseService, IGroup2TaiXeAppService
@@ -38,5 +42,25 @@ namespace Group2.AbpZeroTemplate.Web.Core.Cars
             return procedureHelper.GetData<Group2TaiXeSearchDto>("TAIXE_Group2Search", input);
         }
 
+        public IDictionary<string, object> TAIXE_Group2Insert(Group2TaiXeInsertInputDto input)
+        {
+            return procedureHelper.GetData<dynamic>("TAIXE_Group2Insert", input).FirstOrDefault();
+        }
+
+        public IDictionary<string, object> TAIXE_Group2Del(int Ma)
+        {
+            return procedureHelper.GetData<dynamic>("TAIXE_Group2Del", new
+            {
+                Ma = Ma
+            }).FirstOrDefault();
+        }
+        public IDictionary<string, object> TAIXE_Group2QuickUpdate(Group2TaiXeQuickUpdateInputDto input)
+        {
+            return procedureHelper.GetData<dynamic>("TAIXE_Group2QuickUpdate", input).FirstOrDefault();
+        }
+        public IDictionary<string, object> TAIXE_Group2Update(Group2TaiXeUpdateInputDto input)
+        {
+            return procedureHelper.GetData<dynamic>("TAIXE_Group2Update", input).FirstOrDefault();
+        }
     }
 }

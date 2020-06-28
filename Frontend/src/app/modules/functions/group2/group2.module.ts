@@ -1,3 +1,4 @@
+import { SelectItem } from 'primeng/api';
 import { DriverSearchGroup2Component } from './drivers/driver-search-group2/driver-search-group2.component';
 import { DriverEditGroup2Component } from './drivers/driver-edit-group2/driver-edit-group2.component';
 import { DriverDelGroup2Component } from './drivers/driver-del-group2/driver-del-group2.component';
@@ -12,7 +13,11 @@ import { RouterModule } from "@angular/router";
 import { CarSubGroup2Component } from "./car-sub-group2/car-sub-group2.component";
 import { Group2ServiceProxyModule } from "./group2.service-proxy.module";
 import { UtilsModule } from '@shared/utils/utils.module';
-import { AutoCompleteModule } from 'primeng/primeng';
+import { AutoCompleteModule, DropdownModule } from 'primeng/primeng';
+import { InputTextModule } from 'primeng/inputtext';
+import { ReactiveFormsModule } from '@angular/forms'
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
     imports: [
@@ -24,6 +29,11 @@ import { AutoCompleteModule } from 'primeng/primeng';
         AutoCompleteModule,
         RouterModule,
         Group2ServiceProxyModule,
+        DropdownModule,
+        InputTextModule,
+        DialogModule,
+        ButtonModule,
+        ReactiveFormsModule
     ],
     declarations: [
         CarSubGroup2Component,

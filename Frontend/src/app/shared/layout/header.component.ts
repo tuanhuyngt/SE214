@@ -46,7 +46,8 @@ export class HeaderComponent extends AppComponentBase implements OnInit {
     userName = '';
 
     profilePicture = AppConsts.appBaseUrl + '/assets/common/images/default-profile-picture.png';
-    defaultLogo = AppConsts.appBaseUrl + '/assets/common/images/app-logo-on-' + this.ui.getAsideSkin() + '.png';
+    // defaultLogo = AppConsts.appBaseUrl + '/assets/common/images/app-logo-on-' + this.ui.getAsideSkin() + '.png';
+    defaultLogo = AppConsts.appBaseUrl + '/assets/common/images/logo100.png';
     recentlyLinkedUsers: LinkedUserDto[];
     unreadChatMessageCount = 0;
 

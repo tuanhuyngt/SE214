@@ -1,3 +1,4 @@
+import { environment } from './../../../../../environments/environment.prod';
 import {
     Component,
     ViewChild,
@@ -50,14 +51,14 @@ export class ModelCarManagementGroup4Component extends AppComponentBase implemen
     carYearOpt: object = this.DEFAULT_OPT;
 
     //Car Type Name
-    carTypeNameOpts: Array<object> = [{ name: "Tất cả", value: "-1" }];
+    carTypeNameOpts: Array<object> = [];
     carTypeNameSuggestions: Array<object> = [];
-    carTypeNameOpt: object = this.DEFAULT_OPT;
+    carTypeNameOpt: object = {};
 
     //Car Manufacturer
-    carManufacturerOpts: Array<object> = [{ name: "Tất cả", value: "-1" }];
+    carManufacturerOpts: Array<object> = [];
     carManufacturerSuggestions: Array<object> = [];
-    carManufacturerOpt: object = this.DEFAULT_OPT;
+    carManufacturerOpt: object = {};
 
     //Car Fuel
     carFuelOpts: Array<object> = [
@@ -73,13 +74,21 @@ export class ModelCarManagementGroup4Component extends AppComponentBase implemen
     carTypeInput: Group4LoaiXeDto = new Group4LoaiXeDto();
     carTypeRecords: Group4LoaiXeDto[] = [];
 
+    onKeyUp(event) {
+        if (event.keyCode === 13) {
+            this.search();
+        }
+    }
+
     filterCarTypeNameOpt(event) {
+        this.carTypeInput.loaiXe_Ten = event.query.trim();
         this.carTypeNameSuggestions = this.carTypeNameOpts.filter(opt => {
             return opt["value"].includes(event.query);
         })
     }
 
     filterCarManufacturerOpt(event) {
+        this.carTypeInput.loaiXe_Hang = event.query.toLowerCase().trim();
         this.carManufacturerSuggestions = this.carManufacturerOpts.filter(opt => {
             return opt["value"].includes(event.query);
         })
@@ -92,6 +101,7 @@ export class ModelCarManagementGroup4Component extends AppComponentBase implemen
     }
 
     filterCarYearOpt(event) {
+        this.carTypeInput.loaiXe_NamSX = event.query;
         this.carYearSuggestions = this.carYearOpts.filter(opt => {
             return opt["value"].includes(event.query);
         })
@@ -105,55 +115,48 @@ export class ModelCarManagementGroup4Component extends AppComponentBase implemen
     }
 
     resetOptions() {
-        this.carManufacturerOpts = [{ name: "Tất cả", value: "-1" }]
-        this.carTypeNameOpts = [{ name: "Tất cả", value: "-1" }]
         this.carYearOpts = [{ name: "Tất cả", value: "-1" }]
     }
 
     clearOption(type) {
         switch (type) {
             case "carTypeName":
-                this.carTypeNameOpt = this.DEFAULT_OPT;
+                this.carTypeInput.loaiXe_Ten = "";
                 break;
             case "carManufacturer":
-                this.carManufacturerOpt = this.DEFAULT_OPT;
+                this.carTypeInput.loaiXe_Hang = "";
                 break;
             case "carFuel":
                 this.carFuelOpt = this.DEFAULT_OPT;
                 break;
             case "carYear":
-                this.carYearOpt = this.DEFAULT_OPT;
+                delete this.carTypeInput.loaiXe_NamSX;
                 break;
             default:
                 break;
         }
     }
-    isNumberic: boolean;
 
-    validateInputNumber(event) {
-        const pattern = new RegExp("^[0-9]*$")
-        if (!pattern.test(event.target.value)) {
-            this.isNumberic = false;
-        }
-        this.isNumberic = true;
-    }
-
-    validateFilterInput() {
-        this.carTypeInput.loaiXe_Ten = this.carTypeNameOpt["value"];
-        this.carTypeInput.loaiXe_Hang = this.carManufacturerOpt["value"];
-        this.carTypeInput.loaiXe_LoaiNhienLieu = this.carFuelOpt["value"];
-        this.carTypeInput.loaiXe_NamSX = parseInt(this.carYearOpt["value"]);
-        if (this.carTypeNameOpt["value"] === "-1") {
-            delete this.carTypeInput.loaiXe_Ten;
-        }
-        if (this.carManufacturerOpt["value"] === "-1") {
-            delete this.carTypeInput.loaiXe_Hang;
-        }
-        if (this.carFuelOpt["value"] === "-1") {
-            delete this.carTypeInput.loaiXe_LoaiNhienLieu;
-        }
-        if (this.carYearOpt["value"] === "-1") {
-            delete this.carTypeInput.loaiXe_NamSX;
+    validateFilterInput(inputType) {
+        switch (inputType) {
+            case this.CAR_TYPE_NAME:
+                this.carTypeInput.loaiXe_Ten = this.carTypeNameOpt["value"];
+                break;
+            case this.CAR_TYPE_MANUFACTURER:
+                this.carTypeInput.loaiXe_Hang = this.carManufacturerOpt["value"];
+                break;
+            case this.CAR_FUEL:
+                this.carFuelOpt["value"] === "-1" ?
+                    delete this.carTypeInput.loaiXe_LoaiNhienLieu :
+                    this.carTypeInput.loaiXe_LoaiNhienLieu = this.carFuelOpt["value"];
+                break;
+            case this.CAR_YEAR:
+                this.carYearOpt["value"] === "-1" ?
+                    delete this.carTypeInput.loaiXe_NamSX :
+                    this.carTypeInput.loaiXe_NamSX = parseInt(this.carYearOpt["value"]);
+                break;
+            default:
+                break;
         }
     }
 
@@ -166,10 +169,10 @@ export class ModelCarManagementGroup4Component extends AppComponentBase implemen
             isConfirmed => {
                 if (isConfirmed) {
                     this.Group4LoaiXeServiceProxy.lOAIXE_Group4Delete(this.curCarTypeId).subscribe((response) => {
-                        if (response["Result"] == "-1") {
-                            this.notify.error(response["ErrorDesc"]);
+                        if (response["Result"] === "1") {
+                            this.notify.error("Không tìm thấy dữ liệu", "ERROR", environment.opt);
                         } else {
-                            this.notify.success("Xóa loại xe thành công");
+                            this.notify.success("Xóa loại xe thành công", "SUCCESS", environment.opt);
                             this.resetOptions();
                             this.curCarTypeId = null;
                             this.search();
@@ -181,8 +184,6 @@ export class ModelCarManagementGroup4Component extends AppComponentBase implemen
     }
 
     search() {
-        // validate input before call api
-        this.validateFilterInput();
         // show loading trong gridview
         this.primengTableHelper.showLoadingIndicator();
         this.Group4LoaiXeServiceProxy.lOAIXE_Group4Search(this.carTypeInput)
@@ -206,12 +207,10 @@ export class ModelCarManagementGroup4Component extends AppComponentBase implemen
                     this.checkIndexOfOption(this.carTypeNameOpts, newCarTypeOpt);
                     this.checkIndexOfOption(this.carManufacturerOpts, newCarManufactureOpt);
                 });
-                result.length < 1 && this.notify.error("Không tìm thấy dữ liệu");
+                result.length < 1 && this.notify.error("Không tìm thấy dữ liệu", "ERROR", environment.opt);
                 this.primengTableHelper.totalRecordsCount = result.length;
                 this.primengTableHelper.records = result;
                 this.primengTableHelper.hideLoadingIndicator();
             });
     }
-
-
 }
