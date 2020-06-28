@@ -1,3 +1,8 @@
+import { MaterialCarComponent } from './materials/material-car/material-car.component';
+import { MaterialEditComponent } from './materials/material-edit/material-edit.component';
+import { MaterialSubComponent } from './materials/material-sub/material-sub.component';
+import { MaterialAddComponent } from './materials/material-add/material-add.component';
+import { MaterialComponent } from './materials/material/material.component';
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CarComponent } from "./cars/car/car.component";
@@ -77,6 +82,21 @@ import { DriverSearchComponent } from "./drivers/driver-search/driver-search.com
                     {
                         path: 'driver-search', component: DriverSearchComponent
                     },
+                    {
+                        path: 'material', component: MaterialComponent
+                    },
+                    {
+                        path: 'material-add', component: MaterialAddComponent
+                    },
+                    {
+                        path: 'material-sub', component: MaterialSubComponent
+                    },
+                    {
+                        path: 'material-edit', component: MaterialEditComponent
+                    },
+                    {
+                        path: 'marterial-car', component: MaterialCarComponent
+                    }
                 ],
             },
         ]),

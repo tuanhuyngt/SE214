@@ -1,3 +1,4 @@
+import { MaterialsModule } from './materials/materials.module';
 import { DriversModule } from './drivers/drivers.module';
 import { NgModule } from "@angular/core";
 
@@ -37,7 +38,8 @@ import { FunctionsModule } from './functions/functions.module';
         NewCarsModule,
         RouterModule,
         FunctionsModule,
-        DriversModule
+        DriversModule,
+        MaterialsModule
     ],
     declarations: [
     ],

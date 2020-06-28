@@ -82,6 +82,12 @@ export class AppNavigationService {
                 "flaticon-transport",
                 "/app/admin/driver"
             ),
+            new AppMenuItem(
+                "Quản lý vật tư",
+                "Pages.Group2.Group2TaiXe",
+                "flaticon-car",
+                "/app/admin/material"
+            ),
         ]);
     }
 

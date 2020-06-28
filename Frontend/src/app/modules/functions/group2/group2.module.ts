@@ -1,3 +1,4 @@
+import { MaterialManagementGroup2Component } from './materials/material-management-group2/material-management-group2.component';
 import { SelectItem } from 'primeng/api';
 import { DriverSearchGroup2Component } from './drivers/driver-search-group2/driver-search-group2.component';
 import { DriverEditGroup2Component } from './drivers/driver-edit-group2/driver-edit-group2.component';
@@ -41,7 +42,8 @@ import { ButtonModule } from 'primeng/button';
         DriverAddGroup2Component,
         DriverDelGroup2Component,
         DriverEditGroup2Component,
-        DriverSearchGroup2Component
+        DriverSearchGroup2Component,
+        MaterialManagementGroup2Component
     ],
     exports: [
         CarSubGroup2Component,
@@ -49,7 +51,8 @@ import { ButtonModule } from 'primeng/button';
         DriverAddGroup2Component,
         DriverDelGroup2Component,
         DriverEditGroup2Component,
-        DriverSearchGroup2Component
+        DriverSearchGroup2Component,
+        MaterialManagementGroup2Component
     ],
 })
 export class Group2Module { }
