@@ -95,7 +95,7 @@ import { DriverSearchComponent } from "./drivers/driver-search/driver-search.com
                         path: 'material-edit', component: MaterialEditComponent
                     },
                     {
-                        path: 'marterial-car', component: MaterialCarComponent
+                        path: 'material-car', component: MaterialCarComponent
                     }
                 ],
             },

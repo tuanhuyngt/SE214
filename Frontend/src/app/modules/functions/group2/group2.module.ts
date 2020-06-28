@@ -1,3 +1,6 @@
+import { MaterialCarGroup2Component } from './materials/material-car-group2/material-car-group2.component';
+import { MaterialEditGroup2Component } from './materials/material-edit-group2/material-edit-group2.component';
+import { MaterialAddGroup2Component } from './materials/material-add-group2/material-add-group2.component';
 import { MaterialManagementGroup2Component } from './materials/material-management-group2/material-management-group2.component';
 import { SelectItem } from 'primeng/api';
 import { DriverSearchGroup2Component } from './drivers/driver-search-group2/driver-search-group2.component';
@@ -19,6 +22,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms'
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { MaterialSubGroup2Component } from './materials/material-sub-group2/material-sub-group2.component';
 
 @NgModule({
     imports: [
@@ -43,7 +47,11 @@ import { ButtonModule } from 'primeng/button';
         DriverDelGroup2Component,
         DriverEditGroup2Component,
         DriverSearchGroup2Component,
-        MaterialManagementGroup2Component
+        MaterialManagementGroup2Component,
+        MaterialAddGroup2Component,
+        MaterialEditGroup2Component,
+        MaterialSubGroup2Component,
+        MaterialCarGroup2Component
     ],
     exports: [
         CarSubGroup2Component,
@@ -52,7 +60,11 @@ import { ButtonModule } from 'primeng/button';
         DriverDelGroup2Component,
         DriverEditGroup2Component,
         DriverSearchGroup2Component,
-        MaterialManagementGroup2Component
+        MaterialManagementGroup2Component,
+        MaterialAddGroup2Component,
+        MaterialEditGroup2Component,
+        MaterialSubGroup2Component,
+        MaterialCarGroup2Component
     ],
 })
 export class Group2Module { }
