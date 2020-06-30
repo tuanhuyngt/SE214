@@ -36,8 +36,8 @@ export class DriverEditGroup2Component extends AppComponentBase
    }
 
    driverId: number;
-   NgayDongBaoHiem: Date;
-   NgayHetHanBaoHiem: Date;
+   NgayDongBaoHiem: string;
+   NgayHetHanBaoHiem: string;
    saveDialog: boolean;
 
    driverInput: Group2TaiXeSearchInputDto = new Group2TaiXeSearchInputDto();
@@ -62,6 +62,12 @@ export class DriverEditGroup2Component extends AppComponentBase
                this.driver = response;
                this.driverUpdateInfo.taiXe_HoTen = this.driver.taiXe_HoTen;
                this.driverUpdateInfo.taiXe_MucLuong = this.driver.hopDong_MucLuong;
+               if (this.driver.hopDong_NgayDongBaoHiem) {
+                  this.NgayDongBaoHiem = moment(this.driver.hopDong_NgayDongBaoHiem.toDate()).format('YYYY-MM-DD');
+               } else this.NgayDongBaoHiem = '';
+               if (this.driver.hopDong_NgayHetHan) {
+                  this.NgayHetHanBaoHiem = moment(this.driver.hopDong_NgayHetHan.toDate()).format('YYYY-MM-DD');
+               } else this.NgayHetHanBaoHiem = '';
             }
          });
    }
@@ -120,7 +126,10 @@ export class DriverEditGroup2Component extends AppComponentBase
                   "SUCCESS",
                   environment.opt
                );
-               console.log(this.driverUpdateInfo);
+               this.driverUpdateInfo = new Group2TaiXeUpdateInputDto();
+               this.NgayDongBaoHiem = '';
+               this.NgayHetHanBaoHiem = '';
+               this.search();
             }
          });
       this.onSearch();

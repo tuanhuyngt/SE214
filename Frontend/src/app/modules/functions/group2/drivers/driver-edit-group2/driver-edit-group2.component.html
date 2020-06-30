@@ -9,19 +9,17 @@
                      Thêm mới
                   </a>
                </li>
-               <!-- *ngIf="isGranted('Pages.Group0.Car.Update')" -->
                <li>
-                  <a [class.disabled]="!driverId" [routerLink]="['/app/admin/driver-edit', {id : driverId}]">
+                  <a [class.disabled]="!driverId" routerLink="/app/admin/driver-edit">
                      <i class="flaticon-edit"></i> Chỉnh sửa
                   </a>
                </li>
                <li>
-                  <span (click)="search()">
+                  <a routerLink="/app/admin/driver-search">
                      <i class="flaticon-search"></i>
                      Tìm kiếm
-                  </span>
+                  </a>
                </li>
-               <!-- *ngIf="isGranted('Pages.Group4.Car.Delete')" -->
                <li>
                   <span (click)="delete()" [class.disabled]="!driverId">
                      <i class="flaticon-edit"></i> Xóa
@@ -180,25 +178,25 @@
                               <span></span>
                            </label>
                         </td>
-                        <td>
+                        <td style="text-align: center !important;">
                            <span>{{record['no']}}</span>
                         </td>
-                        <td>
+                        <td style="text-align: center !important;">
                            <span> {{'TX00' + record.ma}}</span>
                         </td>
                         <td>
                            <span>{{record.taiXe_HoTen}}</span>
                         </td>
-                        <td>
-                           <span>{{record.hopDong_NgayDongBaoHiem}}</span>
+                        <td style="text-align: center ;">
+                           <span>{{record.hopDong_NgayDongBaoHiem? record.hopDong_NgayDongBaoHiem.format('DD-MM-YYYY') : ''}}</span>
                         </td>
-                        <td>
-                           <span>{{record.hopDong_NgayHetHan}}</span>
+                        <td style="text-align: center ;">
+                           <span>{{record.hopDong_NgayHetHan? record.hopDong_NgayHetHan.format('DD-MM-YYYY') : ''}}</span>
                         </td>
-                        <td>
+                        <td style="text-align: right !important; padding-right: 10px !important;">
                            <span>{{record.hopDong_MucLuong | currency :'VND' : true}}</span>
                         </td>
-                        <td>
+                        <td style="text-align: center !important;">
                            <span>{{'HD00' + record.ma}}</span>
                         </td>
 
