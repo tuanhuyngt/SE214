@@ -91,7 +91,7 @@
                   <label for="taiXe_HangBangLai">Loại xe</label>
                   <div class="form-group">
                      <p-autoComplete [(ngModel)]="modelCar" name="modelCar" [suggestions]="filteredModelCar"
-                        (completeMethod)="filterModelCar($event)" [size]="10" (onSelect)="carWithoutMaterialSearch()"
+                        (completeMethod)="filterModelCar($event)" [size]="10" (onSelect)="carWithoutMaterialSearch()" field="loaiXe_Ten"
                         (onClear)="onClearLicense()" placeholder="Chọn" [dropdown]="true">
                      </p-autoComplete>
                   </div>

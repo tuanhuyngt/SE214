@@ -1,6 +1,7 @@
 import { PrimengTableHelper } from './../../../../../../shared/helpers/PrimengTableHelper';
 import { Group4LoaiXeServiceProxy, Group4LoaiXeDto, Group5XeDto } from './../../../../../../shared/service-proxies/service-proxies';
 import { Group5XeServiceProxy } from "@shared/service-proxies/service-proxies";
+import { Group2TaiXeServiceProxy } from "@shared/service-proxies/service-proxies"
 import {
    Component,
    OnInit,
@@ -26,7 +27,8 @@ export class MaterialCarGroup2Component extends AppComponentBase
    constructor(
       injector: Injector,
       private _Group5XeServiceProxy: Group5XeServiceProxy,
-      private _Group4LoaiXeServiceProxy : Group4LoaiXeServiceProxy
+      private _Group4LoaiXeServiceProxy : Group4LoaiXeServiceProxy,
+      private _Group2TaiXeServiceProxy : Group2TaiXeServiceProxy
    ) {
       super(injector);
    }
@@ -43,13 +45,13 @@ export class MaterialCarGroup2Component extends AppComponentBase
    modelCarSearchDto = new Group4LoaiXeDto();
    modelCarList : Group4LoaiXeDto[];
    filteredModelCar : any[];
-   modelCar : string;
+   modelCar : any[];
 
    filterModelCar(event) {
       this.filteredModelCar = [];
       for (let i = 0; i<this.modelCarList.length; i++) {
-         let model = this.modelCarList[i].loaiXe_Ten;
-         if (model.toLowerCase().indexOf(event.query.toLowerCase()) == 0) {
+         let model = this.modelCarList[i];
+         if (model.loaiXe_Ten.toLowerCase().indexOf(event.query.toLowerCase()) == 0) {
             this.filteredModelCar.push(model);
          }
       }
@@ -60,20 +62,6 @@ export class MaterialCarGroup2Component extends AppComponentBase
 
    //
 
-   //driverLicenses: string[] = ["B1", "B2", "C", "D", "E", "F"];
-   driverLicenses : Group4LoaiXeDto[];
-   filteredLicenses: any[];
-   license: string;
-
-   filterLicenses(event) {
-      this.filteredLicenses = [];
-      for (let i = 0; i < this.driverLicenses.length; i++) {
-         let brand = this.driverLicenses[i].loaiXe_Ten;
-         if (brand.toLowerCase().indexOf(event.query.toLowerCase()) == 0) {
-            this.filteredLicenses.push(brand);
-         }
-      }
-   }
 
    modelCarSearch() {
       this._Group4LoaiXeServiceProxy.lOAIXE_Group4Search(this.modelCarSearchDto)
@@ -81,13 +69,13 @@ export class MaterialCarGroup2Component extends AppComponentBase
          if (result["Result"] === "-1")
          this.notify.error(result["ErrorDesc"])
          else {
-            this.driverLicenses = result;
             this.modelCarList = result;
          }
       });
    }
 
    carWithoutMaterialSearch() {
+      console.log(this.modelCar);
       this.primengTableHelper.showLoadingIndicator();
       this._Group5XeServiceProxy
          .xe_Group5DisplayVehicles()
@@ -104,6 +92,7 @@ export class MaterialCarGroup2Component extends AppComponentBase
    }
 
    carWithMaterialSearch() {
+      console.log(this.modelCar);
       this.carWithMaterial.showLoadingIndicator();
       this._Group5XeServiceProxy
          .xe_Group5DisplayVehicles()
