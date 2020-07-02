@@ -3945,6 +3945,138 @@ export class Group2ThanhLyServiceProxy {
 }
 
 @Injectable()
+export class Group2VatTuServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    vATTUTHEOXE_Group2Search(input: Group2VatTuTheoXeSearchInput | null | undefined): Observable<Group2VatTuTheoXeSearch[]> {
+        let url_ = this.baseUrl + "/api/Group2VatTu/VATTUTHEOXE_Group2Search";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processVATTUTHEOXE_Group2Search(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processVATTUTHEOXE_Group2Search(<any>response_);
+                } catch (e) {
+                    return <Observable<Group2VatTuTheoXeSearch[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<Group2VatTuTheoXeSearch[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processVATTUTHEOXE_Group2Search(response: HttpResponseBase): Observable<Group2VatTuTheoXeSearch[]> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200 && resultData200.constructor === Array) {
+                result200 = [];
+                for (let item of resultData200)
+                    result200.push(Group2VatTuTheoXeSearch.fromJS(item));
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<Group2VatTuTheoXeSearch[]>(<any>null);
+    }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    vATTUTHEOXE_Group2SearchInUse(input: Group2VatTuTheoXeSearchInput | null | undefined): Observable<Group2VatTuTheoXeSearch[]> {
+        let url_ = this.baseUrl + "/api/Group2VatTu/VATTUTHEOXE_Group2SearchInUse";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processVATTUTHEOXE_Group2SearchInUse(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processVATTUTHEOXE_Group2SearchInUse(<any>response_);
+                } catch (e) {
+                    return <Observable<Group2VatTuTheoXeSearch[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<Group2VatTuTheoXeSearch[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processVATTUTHEOXE_Group2SearchInUse(response: HttpResponseBase): Observable<Group2VatTuTheoXeSearch[]> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200 && resultData200.constructor === Array) {
+                result200 = [];
+                for (let item of resultData200)
+                    result200.push(Group2VatTuTheoXeSearch.fromJS(item));
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<Group2VatTuTheoXeSearch[]>(<any>null);
+    }
+}
+
+@Injectable()
 export class Group3BangGiaServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -15007,6 +15139,102 @@ export interface IGroup2ThanhLyDto {
     thanhLy_SoTien: number;
     thanhLy_NguoiTao: string;
     thanhLy_NgayTao: moment.Moment;
+}
+
+export class Group2VatTuTheoXeSearchInput implements IGroup2VatTuTheoXeSearchInput {
+    xe_MaLoaiXe!: number | undefined;
+    xe_BienSo!: string | undefined;
+
+    constructor(data?: IGroup2VatTuTheoXeSearchInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.xe_MaLoaiXe = data["xe_MaLoaiXe"];
+            this.xe_BienSo = data["xe_BienSo"];
+        }
+    }
+
+    static fromJS(data: any): Group2VatTuTheoXeSearchInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new Group2VatTuTheoXeSearchInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["xe_MaLoaiXe"] = this.xe_MaLoaiXe;
+        data["xe_BienSo"] = this.xe_BienSo;
+        return data; 
+    }
+}
+
+export interface IGroup2VatTuTheoXeSearchInput {
+    xe_MaLoaiXe: number | undefined;
+    xe_BienSo: string | undefined;
+}
+
+export class Group2VatTuTheoXeSearch implements IGroup2VatTuTheoXeSearch {
+    ma!: number | undefined;
+    xe_MaLoaiXe!: number | undefined;
+    loaiXe_Ten!: string | undefined;
+    xe_Ten!: string | undefined;
+    xe_Gia!: number | undefined;
+    xe_BienSo!: string | undefined;
+
+    constructor(data?: IGroup2VatTuTheoXeSearch) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.ma = data["ma"];
+            this.xe_MaLoaiXe = data["xe_MaLoaiXe"];
+            this.loaiXe_Ten = data["loaiXe_Ten"];
+            this.xe_Ten = data["xe_Ten"];
+            this.xe_Gia = data["xe_Gia"];
+            this.xe_BienSo = data["xe_BienSo"];
+        }
+    }
+
+    static fromJS(data: any): Group2VatTuTheoXeSearch {
+        data = typeof data === 'object' ? data : {};
+        let result = new Group2VatTuTheoXeSearch();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["ma"] = this.ma;
+        data["xe_MaLoaiXe"] = this.xe_MaLoaiXe;
+        data["loaiXe_Ten"] = this.loaiXe_Ten;
+        data["xe_Ten"] = this.xe_Ten;
+        data["xe_Gia"] = this.xe_Gia;
+        data["xe_BienSo"] = this.xe_BienSo;
+        return data; 
+    }
+}
+
+export interface IGroup2VatTuTheoXeSearch {
+    ma: number | undefined;
+    xe_MaLoaiXe: number | undefined;
+    loaiXe_Ten: string | undefined;
+    xe_Ten: string | undefined;
+    xe_Gia: number | undefined;
+    xe_BienSo: string | undefined;
 }
 
 export class Group3BangGiaDto implements IGroup3BangGiaDto {

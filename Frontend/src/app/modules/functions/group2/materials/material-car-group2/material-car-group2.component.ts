@@ -1,7 +1,14 @@
-import { PrimengTableHelper } from './../../../../../../shared/helpers/PrimengTableHelper';
-import { Group4LoaiXeServiceProxy, Group4LoaiXeDto, Group5XeDto } from './../../../../../../shared/service-proxies/service-proxies';
+import { PrimengTableHelper } from "./../../../../../../shared/helpers/PrimengTableHelper";
+import {
+   Group4LoaiXeServiceProxy,
+   Group4LoaiXeDto,
+   Group5XeDto,
+   Group2ThanhLyServiceProxy,
+   Group2VatTuTheoXeSearchInput,
+} from "./../../../../../../shared/service-proxies/service-proxies";
 import { Group5XeServiceProxy } from "@shared/service-proxies/service-proxies";
-import { Group2TaiXeServiceProxy } from "@shared/service-proxies/service-proxies"
+import { Group2TaiXeServiceProxy } from "@shared/service-proxies/service-proxies";
+import { Group2VatTuServiceProxy } from "@shared/service-proxies/service-proxies";
 import {
    Component,
    OnInit,
@@ -12,7 +19,7 @@ import {
 import { AppComponentBase } from "@shared/common/app-component-base";
 import { Table } from "primeng/components/table/table";
 import { Paginator } from "primeng/primeng";
-import { result } from 'lodash';
+import { result } from "lodash";
 
 @Component({
    selector: "app-material-car-group2",
@@ -27,8 +34,9 @@ export class MaterialCarGroup2Component extends AppComponentBase
    constructor(
       injector: Injector,
       private _Group5XeServiceProxy: Group5XeServiceProxy,
-      private _Group4LoaiXeServiceProxy : Group4LoaiXeServiceProxy,
-      private _Group2TaiXeServiceProxy : Group2TaiXeServiceProxy
+      private _Group4LoaiXeServiceProxy: Group4LoaiXeServiceProxy,
+      private _Group2TaiXeServiceProxy: Group2TaiXeServiceProxy,
+      private _Group2VatTuServiceProxy: Group2VatTuServiceProxy
    ) {
       super(injector);
    }
@@ -43,15 +51,19 @@ export class MaterialCarGroup2Component extends AppComponentBase
 
    // Init Data Model Car
    modelCarSearchDto = new Group4LoaiXeDto();
-   modelCarList : Group4LoaiXeDto[];
-   filteredModelCar : any[];
-   modelCar : any[];
+   modelCarList: Group4LoaiXeDto[];
+   filteredModelCar: any[];
+   modelCarWithout: Group4LoaiXeDto;
+   modelCarWith: Group4LoaiXeDto;
 
    filterModelCar(event) {
       this.filteredModelCar = [];
-      for (let i = 0; i<this.modelCarList.length; i++) {
+      for (let i = 0; i < this.modelCarList.length; i++) {
          let model = this.modelCarList[i];
-         if (model.loaiXe_Ten.toLowerCase().indexOf(event.query.toLowerCase()) == 0) {
+         if (
+            model.loaiXe_Ten.toLowerCase().indexOf(event.query.toLowerCase()) ==
+            0
+         ) {
             this.filteredModelCar.push(model);
          }
       }
@@ -62,23 +74,26 @@ export class MaterialCarGroup2Component extends AppComponentBase
 
    //
 
+   // Init Dto Search
+   CarWithoutMI = new Group2VatTuTheoXeSearchInput();
+   CarWithMI = new Group2VatTuTheoXeSearchInput();
 
    modelCarSearch() {
-      this._Group4LoaiXeServiceProxy.lOAIXE_Group4Search(this.modelCarSearchDto)
-      .subscribe((result) => {
-         if (result["Result"] === "-1")
-         this.notify.error(result["ErrorDesc"])
-         else {
-            this.modelCarList = result;
-         }
-      });
+      this._Group4LoaiXeServiceProxy
+         .lOAIXE_Group4Search(this.modelCarSearchDto)
+         .subscribe((result) => {
+            if (result["Result"] === "-1")
+               this.notify.error(result["ErrorDesc"]);
+            else {
+               this.modelCarList = result;
+            }
+         });
    }
 
    carWithoutMaterialSearch() {
-      console.log(this.modelCar);
       this.primengTableHelper.showLoadingIndicator();
-      this._Group5XeServiceProxy
-         .xe_Group5DisplayVehicles()
+      this._Group2VatTuServiceProxy
+         .vATTUTHEOXE_Group2SearchInUse(this.CarWithoutMI)
          .subscribe((result) => {
             let no = 1;
             result.forEach((item) => {
@@ -92,10 +107,9 @@ export class MaterialCarGroup2Component extends AppComponentBase
    }
 
    carWithMaterialSearch() {
-      console.log(this.modelCar);
       this.carWithMaterial.showLoadingIndicator();
-      this._Group5XeServiceProxy
-         .xe_Group5DisplayVehicles()
+      this._Group2VatTuServiceProxy
+         .vATTUTHEOXE_Group2Search(this.CarWithMI)
          .subscribe((result) => {
             let no = 1;
             result.forEach((item) => {
@@ -108,4 +122,30 @@ export class MaterialCarGroup2Component extends AppComponentBase
          });
    }
 
+   //Button
+   carInputSubmit() {
+      this.carWithoutMaterialSearch();
+   }
+   carInputSubmitWith() {
+      this.carWithMaterialSearch();
+   }
+
+   onSelectCarType() {
+      this.CarWithoutMI.xe_MaLoaiXe = this.modelCarWithout.ma;
+      this.carWithoutMaterialSearch();
+   }
+
+   onSelectCarTypeWith() {
+      this.CarWithMI.xe_MaLoaiXe = this.modelCarWith.ma;
+      this.carWithMaterialSearch();
+   }
+
+   onClearCarType() {
+      delete this.CarWithoutMI.xe_MaLoaiXe;
+      this.carWithoutMaterialSearch();
+   }
+   onClearCarTypeWith() {
+      delete this.CarWithMI.xe_MaLoaiXe;
+      this.carWithMaterialSearch();
+   }
 }
