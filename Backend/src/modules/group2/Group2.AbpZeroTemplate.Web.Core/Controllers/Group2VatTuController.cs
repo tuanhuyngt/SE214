@@ -32,5 +32,45 @@ namespace Group2.AbpZeroTemplate.Application.Controllers
         {
             return Group2VatTuAppService.VATTUTHEOXE_Group2SearchInUse(input);
         }
+        [HttpPost]
+        public IDictionary<string, object> VATTUTHEOXE_Group2Insert([FromBody] Group2VatTuTheoXeInsert input)
+        {
+            return Group2VatTuAppService.VATTUTHEOXE_Group2Insert(input);
+        }
+        [HttpPost]
+        public IDictionary<string, object> VATTUTHEOXE_Group2Update([FromBody] Group2VatTuTheoXeUpdate input)
+        {
+            return Group2VatTuAppService.VATTUTHEOXE_Group2Update(input);
+        }
+        [HttpPost]
+        public IDictionary<string, object> VATTU_Group2Insert([FromBody] Group2VatTuInsertInput input)
+        {
+            return Group2VatTuAppService.VATTU_Group2Insert(input);
+        }
+        [HttpPost]
+        public IDictionary<string, object> VATTU_Group2Update([FromBody] Group2VatTuUpdateInput input)
+        {
+            return Group2VatTuAppService.VATTU_Group2Update(input);
+        }
+        [HttpPost]
+        public List<Group2VatTuSearch> VATTU_Group2Search([FromBody] Group2VatTuSearchInput input)
+        {
+            return Group2VatTuAppService.VATTU_Group2Search(input);
+        }
+        [HttpPost]
+        public List<Group2VatTuSearch> VATTU_Group2SearchById(int Ma)
+        {
+            return Group2VatTuAppService.VATTU_Group2SearchById(Ma);
+        }
+        [HttpPost]
+        public IDictionary<string, object> VATTU_Group2ThanhLy([FromBody] Group2VatTuThanhLyInput input)
+        {
+            return Group2VatTuAppService.VATTU_Group2ThanhLy(input);
+        }
+        [HttpPost]
+        public List<Group2VatTuSearchThanhLy> VATTU_Group2ThanhLySearch([FromBody] Group2VatTuSearchThanhLyInput input)
+        {
+            return Group2VatTuAppService.VATTU_Group2ThanhLySearch(input);
+        }
     }
 }
