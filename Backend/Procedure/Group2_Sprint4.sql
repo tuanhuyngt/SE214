@@ -257,3 +257,20 @@ begin catch
 rollback transaction
 end catch
 go
+--Del VatTu Theo Xe
+CREATE or alter Proc VATTUTHEOXE_Group2Del
+@Ma int = null
+as
+begin transaction
+begin try
+	update VatTuTheoXe
+	set VatTuTheoXe_TrangThai = 'X'
+	where Ma = @Ma
+commit transaction
+	select '0' as Result, N'Cập nhật thông tin thành công' as ErrorDesc, @Ma as Ma
+end try
+begin catch
+rollback transaction
+end catch
+go
+
