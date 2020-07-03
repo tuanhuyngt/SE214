@@ -43,6 +43,11 @@ namespace Group2.AbpZeroTemplate.Application.Controllers
             return Group2VatTuAppService.VATTUTHEOXE_Group2Update(input);
         }
         [HttpPost]
+        public IDictionary<string, object> VATTUTHEOXE_Group2Del(int Ma)
+        {
+            return Group2VatTuAppService.VATTUTHEOXE_Group2Del(Ma);
+        }
+        [HttpPost]
         public IDictionary<string, object> VATTU_Group2Insert([FromBody] Group2VatTuInsertInput input)
         {
             return Group2VatTuAppService.VATTU_Group2Insert(input);

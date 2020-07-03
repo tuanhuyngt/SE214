@@ -26,5 +26,6 @@ namespace Group2.AbpZeroTemplate.Application
         public const string Pages_Administration_Group2VatTuTheoXe_Search = "Pages.Group2.Group2VatTuTheoXe.Search";
         public const string Pages_Administration_Group2VatTuTheoXe_Insert = "Pages.Group2.Group2VatTuTheoXe.Insert";
         public const string Pages_Administration_Group2VatTuTheoXe_Update = "Pages.Group2.Group2VatTuTheoXe.Update";
+        public const string Pages_Administration_Group2VatTuTheoXe_Delete = "Pages.Group2.Group2VatTuTheoXe.Delete";
     }
 }
