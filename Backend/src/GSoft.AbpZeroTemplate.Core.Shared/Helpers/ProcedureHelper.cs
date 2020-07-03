@@ -19,7 +19,7 @@ namespace GSoft.AbpZeroTemplate.Helpers
         private readonly string connectionString;
         public ProcedureHelper()
         {
-            connectionString = "Server=tcp:tuanhuyngt.database.windows.net,1433;Initial Catalog=DbPratice;Persist Security Info=False;User ID=tuanhuyngt;Password=tHuy456456;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            connectionString = "Data Source=LAPTOP-07947GSM;Initial Catalog=DbPratice;Integrated Security=True";
         }
 
         private List<ProcedureParamInfo> GetParamInfos(IDbConnection conn, string procedureName)
