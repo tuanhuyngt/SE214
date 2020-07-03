@@ -4074,6 +4074,495 @@ export class Group2VatTuServiceProxy {
         }
         return _observableOf<Group2VatTuTheoXeSearch[]>(<any>null);
     }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    vATTUTHEOXE_Group2Insert(input: Group2VatTuTheoXeInsert | null | undefined): Observable<{ [key: string] : any; }> {
+        let url_ = this.baseUrl + "/api/Group2VatTu/VATTUTHEOXE_Group2Insert";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processVATTUTHEOXE_Group2Insert(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processVATTUTHEOXE_Group2Insert(<any>response_);
+                } catch (e) {
+                    return <Observable<{ [key: string] : any; }>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<{ [key: string] : any; }>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processVATTUTHEOXE_Group2Insert(response: HttpResponseBase): Observable<{ [key: string] : any; }> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200) {
+                result200 = {};
+                for (let key in resultData200) {
+                    if (resultData200.hasOwnProperty(key))
+                        result200[key] = resultData200[key];
+                }
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<{ [key: string] : any; }>(<any>null);
+    }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    vATTUTHEOXE_Group2Update(input: Group2VatTuTheoXeUpdate | null | undefined): Observable<{ [key: string] : any; }> {
+        let url_ = this.baseUrl + "/api/Group2VatTu/VATTUTHEOXE_Group2Update";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processVATTUTHEOXE_Group2Update(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processVATTUTHEOXE_Group2Update(<any>response_);
+                } catch (e) {
+                    return <Observable<{ [key: string] : any; }>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<{ [key: string] : any; }>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processVATTUTHEOXE_Group2Update(response: HttpResponseBase): Observable<{ [key: string] : any; }> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200) {
+                result200 = {};
+                for (let key in resultData200) {
+                    if (resultData200.hasOwnProperty(key))
+                        result200[key] = resultData200[key];
+                }
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<{ [key: string] : any; }>(<any>null);
+    }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    vATTU_Group2Insert(input: Group2VatTuInsertInput | null | undefined): Observable<{ [key: string] : any; }> {
+        let url_ = this.baseUrl + "/api/Group2VatTu/VATTU_Group2Insert";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processVATTU_Group2Insert(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processVATTU_Group2Insert(<any>response_);
+                } catch (e) {
+                    return <Observable<{ [key: string] : any; }>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<{ [key: string] : any; }>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processVATTU_Group2Insert(response: HttpResponseBase): Observable<{ [key: string] : any; }> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200) {
+                result200 = {};
+                for (let key in resultData200) {
+                    if (resultData200.hasOwnProperty(key))
+                        result200[key] = resultData200[key];
+                }
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<{ [key: string] : any; }>(<any>null);
+    }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    vATTU_Group2Update(input: Group2VatTuUpdateInput | null | undefined): Observable<{ [key: string] : any; }> {
+        let url_ = this.baseUrl + "/api/Group2VatTu/VATTU_Group2Update";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processVATTU_Group2Update(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processVATTU_Group2Update(<any>response_);
+                } catch (e) {
+                    return <Observable<{ [key: string] : any; }>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<{ [key: string] : any; }>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processVATTU_Group2Update(response: HttpResponseBase): Observable<{ [key: string] : any; }> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200) {
+                result200 = {};
+                for (let key in resultData200) {
+                    if (resultData200.hasOwnProperty(key))
+                        result200[key] = resultData200[key];
+                }
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<{ [key: string] : any; }>(<any>null);
+    }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    vATTU_Group2Search(input: Group2VatTuSearchInput | null | undefined): Observable<Group2VatTuSearch[]> {
+        let url_ = this.baseUrl + "/api/Group2VatTu/VATTU_Group2Search";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processVATTU_Group2Search(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processVATTU_Group2Search(<any>response_);
+                } catch (e) {
+                    return <Observable<Group2VatTuSearch[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<Group2VatTuSearch[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processVATTU_Group2Search(response: HttpResponseBase): Observable<Group2VatTuSearch[]> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200 && resultData200.constructor === Array) {
+                result200 = [];
+                for (let item of resultData200)
+                    result200.push(Group2VatTuSearch.fromJS(item));
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<Group2VatTuSearch[]>(<any>null);
+    }
+
+    /**
+     * @ma (optional) 
+     * @return Success
+     */
+    vATTU_Group2SearchById(ma: number | null | undefined): Observable<Group2VatTuSearch[]> {
+        let url_ = this.baseUrl + "/api/Group2VatTu/VATTU_Group2SearchById?";
+        if (ma !== undefined)
+            url_ += "Ma=" + encodeURIComponent("" + ma) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processVATTU_Group2SearchById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processVATTU_Group2SearchById(<any>response_);
+                } catch (e) {
+                    return <Observable<Group2VatTuSearch[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<Group2VatTuSearch[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processVATTU_Group2SearchById(response: HttpResponseBase): Observable<Group2VatTuSearch[]> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200 && resultData200.constructor === Array) {
+                result200 = [];
+                for (let item of resultData200)
+                    result200.push(Group2VatTuSearch.fromJS(item));
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<Group2VatTuSearch[]>(<any>null);
+    }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    vATTU_Group2ThanhLy(input: Group2VatTuThanhLyInput | null | undefined): Observable<{ [key: string] : any; }> {
+        let url_ = this.baseUrl + "/api/Group2VatTu/VATTU_Group2ThanhLy";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processVATTU_Group2ThanhLy(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processVATTU_Group2ThanhLy(<any>response_);
+                } catch (e) {
+                    return <Observable<{ [key: string] : any; }>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<{ [key: string] : any; }>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processVATTU_Group2ThanhLy(response: HttpResponseBase): Observable<{ [key: string] : any; }> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200) {
+                result200 = {};
+                for (let key in resultData200) {
+                    if (resultData200.hasOwnProperty(key))
+                        result200[key] = resultData200[key];
+                }
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<{ [key: string] : any; }>(<any>null);
+    }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    vATTU_Group2ThanhLySearch(input: Group2VatTuSearchThanhLyInput | null | undefined): Observable<Group2VatTuSearchThanhLy[]> {
+        let url_ = this.baseUrl + "/api/Group2VatTu/VATTU_Group2ThanhLySearch";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processVATTU_Group2ThanhLySearch(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processVATTU_Group2ThanhLySearch(<any>response_);
+                } catch (e) {
+                    return <Observable<Group2VatTuSearchThanhLy[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<Group2VatTuSearchThanhLy[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processVATTU_Group2ThanhLySearch(response: HttpResponseBase): Observable<Group2VatTuSearchThanhLy[]> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200 && resultData200.constructor === Array) {
+                result200 = [];
+                for (let item of resultData200)
+                    result200.push(Group2VatTuSearchThanhLy.fromJS(item));
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<Group2VatTuSearchThanhLy[]>(<any>null);
+    }
 }
 
 @Injectable()
@@ -15235,6 +15724,490 @@ export interface IGroup2VatTuTheoXeSearch {
     xe_Ten: string | undefined;
     xe_Gia: number | undefined;
     xe_BienSo: string | undefined;
+}
+
+export class Group2VatTuTheoXeInsert implements IGroup2VatTuTheoXeInsert {
+    vatTuTheoXe_MaVatTu!: number | undefined;
+    vatTuTheoXe_MaXe!: number | undefined;
+
+    constructor(data?: IGroup2VatTuTheoXeInsert) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.vatTuTheoXe_MaVatTu = data["vatTuTheoXe_MaVatTu"];
+            this.vatTuTheoXe_MaXe = data["vatTuTheoXe_MaXe"];
+        }
+    }
+
+    static fromJS(data: any): Group2VatTuTheoXeInsert {
+        data = typeof data === 'object' ? data : {};
+        let result = new Group2VatTuTheoXeInsert();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["vatTuTheoXe_MaVatTu"] = this.vatTuTheoXe_MaVatTu;
+        data["vatTuTheoXe_MaXe"] = this.vatTuTheoXe_MaXe;
+        return data; 
+    }
+}
+
+export interface IGroup2VatTuTheoXeInsert {
+    vatTuTheoXe_MaVatTu: number | undefined;
+    vatTuTheoXe_MaXe: number | undefined;
+}
+
+export class Group2VatTuTheoXeUpdate implements IGroup2VatTuTheoXeUpdate {
+    vatTuTheoXe_Ma!: number | undefined;
+    vatTuTheoXe_MaVatTu!: number | undefined;
+    vatTuTheoXe_MaXe!: number | undefined;
+
+    constructor(data?: IGroup2VatTuTheoXeUpdate) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.vatTuTheoXe_Ma = data["vatTuTheoXe_Ma"];
+            this.vatTuTheoXe_MaVatTu = data["vatTuTheoXe_MaVatTu"];
+            this.vatTuTheoXe_MaXe = data["vatTuTheoXe_MaXe"];
+        }
+    }
+
+    static fromJS(data: any): Group2VatTuTheoXeUpdate {
+        data = typeof data === 'object' ? data : {};
+        let result = new Group2VatTuTheoXeUpdate();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["vatTuTheoXe_Ma"] = this.vatTuTheoXe_Ma;
+        data["vatTuTheoXe_MaVatTu"] = this.vatTuTheoXe_MaVatTu;
+        data["vatTuTheoXe_MaXe"] = this.vatTuTheoXe_MaXe;
+        return data; 
+    }
+}
+
+export interface IGroup2VatTuTheoXeUpdate {
+    vatTuTheoXe_Ma: number | undefined;
+    vatTuTheoXe_MaVatTu: number | undefined;
+    vatTuTheoXe_MaXe: number | undefined;
+}
+
+export class Group2VatTuInsertInput implements IGroup2VatTuInsertInput {
+    vatTu_Ten!: string | undefined;
+    vatTu_SoLuong!: number | undefined;
+    vatTu_MoTa!: string | undefined;
+    vatTu_DonGia!: number | undefined;
+    vatTu_NguoiTao!: string | undefined;
+
+    constructor(data?: IGroup2VatTuInsertInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.vatTu_Ten = data["vatTu_Ten"];
+            this.vatTu_SoLuong = data["vatTu_SoLuong"];
+            this.vatTu_MoTa = data["vatTu_MoTa"];
+            this.vatTu_DonGia = data["vatTu_DonGia"];
+            this.vatTu_NguoiTao = data["vatTu_NguoiTao"];
+        }
+    }
+
+    static fromJS(data: any): Group2VatTuInsertInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new Group2VatTuInsertInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["vatTu_Ten"] = this.vatTu_Ten;
+        data["vatTu_SoLuong"] = this.vatTu_SoLuong;
+        data["vatTu_MoTa"] = this.vatTu_MoTa;
+        data["vatTu_DonGia"] = this.vatTu_DonGia;
+        data["vatTu_NguoiTao"] = this.vatTu_NguoiTao;
+        return data; 
+    }
+}
+
+export interface IGroup2VatTuInsertInput {
+    vatTu_Ten: string | undefined;
+    vatTu_SoLuong: number | undefined;
+    vatTu_MoTa: string | undefined;
+    vatTu_DonGia: number | undefined;
+    vatTu_NguoiTao: string | undefined;
+}
+
+export class Group2VatTuUpdateInput implements IGroup2VatTuUpdateInput {
+    ma!: number | undefined;
+    vatTu_Ten!: string | undefined;
+    vatTu_SoLuong!: number | undefined;
+    vatTu_MoTa!: string | undefined;
+    vatTu_DonGia!: number | undefined;
+    vatTu_NguoiTao!: string | undefined;
+
+    constructor(data?: IGroup2VatTuUpdateInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.ma = data["ma"];
+            this.vatTu_Ten = data["vatTu_Ten"];
+            this.vatTu_SoLuong = data["vatTu_SoLuong"];
+            this.vatTu_MoTa = data["vatTu_MoTa"];
+            this.vatTu_DonGia = data["vatTu_DonGia"];
+            this.vatTu_NguoiTao = data["vatTu_NguoiTao"];
+        }
+    }
+
+    static fromJS(data: any): Group2VatTuUpdateInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new Group2VatTuUpdateInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["ma"] = this.ma;
+        data["vatTu_Ten"] = this.vatTu_Ten;
+        data["vatTu_SoLuong"] = this.vatTu_SoLuong;
+        data["vatTu_MoTa"] = this.vatTu_MoTa;
+        data["vatTu_DonGia"] = this.vatTu_DonGia;
+        data["vatTu_NguoiTao"] = this.vatTu_NguoiTao;
+        return data; 
+    }
+}
+
+export interface IGroup2VatTuUpdateInput {
+    ma: number | undefined;
+    vatTu_Ten: string | undefined;
+    vatTu_SoLuong: number | undefined;
+    vatTu_MoTa: string | undefined;
+    vatTu_DonGia: number | undefined;
+    vatTu_NguoiTao: string | undefined;
+}
+
+export class Group2VatTuSearchInput implements IGroup2VatTuSearchInput {
+    vatTu_Ma!: number | undefined;
+    vatTu_Ten!: string | undefined;
+    vatTu_SoLuong!: number | undefined;
+    vatTu_DonGia!: number | undefined;
+    vatTu_TongGia!: number | undefined;
+    vatTu_TrangThai!: string | undefined;
+
+    constructor(data?: IGroup2VatTuSearchInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.vatTu_Ma = data["vatTu_Ma"];
+            this.vatTu_Ten = data["vatTu_Ten"];
+            this.vatTu_SoLuong = data["vatTu_SoLuong"];
+            this.vatTu_DonGia = data["vatTu_DonGia"];
+            this.vatTu_TongGia = data["vatTu_TongGia"];
+            this.vatTu_TrangThai = data["vatTu_TrangThai"];
+        }
+    }
+
+    static fromJS(data: any): Group2VatTuSearchInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new Group2VatTuSearchInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["vatTu_Ma"] = this.vatTu_Ma;
+        data["vatTu_Ten"] = this.vatTu_Ten;
+        data["vatTu_SoLuong"] = this.vatTu_SoLuong;
+        data["vatTu_DonGia"] = this.vatTu_DonGia;
+        data["vatTu_TongGia"] = this.vatTu_TongGia;
+        data["vatTu_TrangThai"] = this.vatTu_TrangThai;
+        return data; 
+    }
+}
+
+export interface IGroup2VatTuSearchInput {
+    vatTu_Ma: number | undefined;
+    vatTu_Ten: string | undefined;
+    vatTu_SoLuong: number | undefined;
+    vatTu_DonGia: number | undefined;
+    vatTu_TongGia: number | undefined;
+    vatTu_TrangThai: string | undefined;
+}
+
+export class Group2VatTuSearch implements IGroup2VatTuSearch {
+    ma!: number | undefined;
+    vatTu_Ten!: string | undefined;
+    vatTu_SoLuong!: number | undefined;
+    vatTu_MoTa!: string | undefined;
+    vatTu_DonGia!: number | undefined;
+    vatTu_TongGia!: number | undefined;
+    vatTu_TrangThai!: string | undefined;
+    vatTu_NgayTao!: moment.Moment | undefined;
+
+    constructor(data?: IGroup2VatTuSearch) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.ma = data["ma"];
+            this.vatTu_Ten = data["vatTu_Ten"];
+            this.vatTu_SoLuong = data["vatTu_SoLuong"];
+            this.vatTu_MoTa = data["vatTu_MoTa"];
+            this.vatTu_DonGia = data["vatTu_DonGia"];
+            this.vatTu_TongGia = data["vatTu_TongGia"];
+            this.vatTu_TrangThai = data["vatTu_TrangThai"];
+            this.vatTu_NgayTao = data["vatTu_NgayTao"] ? moment(data["vatTu_NgayTao"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): Group2VatTuSearch {
+        data = typeof data === 'object' ? data : {};
+        let result = new Group2VatTuSearch();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["ma"] = this.ma;
+        data["vatTu_Ten"] = this.vatTu_Ten;
+        data["vatTu_SoLuong"] = this.vatTu_SoLuong;
+        data["vatTu_MoTa"] = this.vatTu_MoTa;
+        data["vatTu_DonGia"] = this.vatTu_DonGia;
+        data["vatTu_TongGia"] = this.vatTu_TongGia;
+        data["vatTu_TrangThai"] = this.vatTu_TrangThai;
+        data["vatTu_NgayTao"] = this.vatTu_NgayTao ? this.vatTu_NgayTao.toISOString() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface IGroup2VatTuSearch {
+    ma: number | undefined;
+    vatTu_Ten: string | undefined;
+    vatTu_SoLuong: number | undefined;
+    vatTu_MoTa: string | undefined;
+    vatTu_DonGia: number | undefined;
+    vatTu_TongGia: number | undefined;
+    vatTu_TrangThai: string | undefined;
+    vatTu_NgayTao: moment.Moment | undefined;
+}
+
+export class Group2VatTuThanhLyInput implements IGroup2VatTuThanhLyInput {
+    thanhLyVatTu_MaVatTu!: number | undefined;
+    thanhLyVatTu_SoTienThanhLy!: number | undefined;
+    thanhLyVatTu_SoLuong!: number | undefined;
+    thanhLyVatTu_LyDo!: string | undefined;
+    thanhLyVatTu_NguoiTao!: string | undefined;
+
+    constructor(data?: IGroup2VatTuThanhLyInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.thanhLyVatTu_MaVatTu = data["thanhLyVatTu_MaVatTu"];
+            this.thanhLyVatTu_SoTienThanhLy = data["thanhLyVatTu_SoTienThanhLy"];
+            this.thanhLyVatTu_SoLuong = data["thanhLyVatTu_SoLuong"];
+            this.thanhLyVatTu_LyDo = data["thanhLyVatTu_LyDo"];
+            this.thanhLyVatTu_NguoiTao = data["thanhLyVatTu_NguoiTao"];
+        }
+    }
+
+    static fromJS(data: any): Group2VatTuThanhLyInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new Group2VatTuThanhLyInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["thanhLyVatTu_MaVatTu"] = this.thanhLyVatTu_MaVatTu;
+        data["thanhLyVatTu_SoTienThanhLy"] = this.thanhLyVatTu_SoTienThanhLy;
+        data["thanhLyVatTu_SoLuong"] = this.thanhLyVatTu_SoLuong;
+        data["thanhLyVatTu_LyDo"] = this.thanhLyVatTu_LyDo;
+        data["thanhLyVatTu_NguoiTao"] = this.thanhLyVatTu_NguoiTao;
+        return data; 
+    }
+}
+
+export interface IGroup2VatTuThanhLyInput {
+    thanhLyVatTu_MaVatTu: number | undefined;
+    thanhLyVatTu_SoTienThanhLy: number | undefined;
+    thanhLyVatTu_SoLuong: number | undefined;
+    thanhLyVatTu_LyDo: string | undefined;
+    thanhLyVatTu_NguoiTao: string | undefined;
+}
+
+export class Group2VatTuSearchThanhLyInput implements IGroup2VatTuSearchThanhLyInput {
+    thanhLyVatTu_Ma!: number | undefined;
+    thanhLyVatTu_MaVatTu!: number | undefined;
+    thanhLyVatTu_SoTienThanhLy!: number | undefined;
+    thanhLyVatTu_SoLuong!: number | undefined;
+    thanhLyVatTu_LyDo!: string | undefined;
+    thanhLyVatTu_NguoiTao!: string | undefined;
+
+    constructor(data?: IGroup2VatTuSearchThanhLyInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.thanhLyVatTu_Ma = data["thanhLyVatTu_Ma"];
+            this.thanhLyVatTu_MaVatTu = data["thanhLyVatTu_MaVatTu"];
+            this.thanhLyVatTu_SoTienThanhLy = data["thanhLyVatTu_SoTienThanhLy"];
+            this.thanhLyVatTu_SoLuong = data["thanhLyVatTu_SoLuong"];
+            this.thanhLyVatTu_LyDo = data["thanhLyVatTu_LyDo"];
+            this.thanhLyVatTu_NguoiTao = data["thanhLyVatTu_NguoiTao"];
+        }
+    }
+
+    static fromJS(data: any): Group2VatTuSearchThanhLyInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new Group2VatTuSearchThanhLyInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["thanhLyVatTu_Ma"] = this.thanhLyVatTu_Ma;
+        data["thanhLyVatTu_MaVatTu"] = this.thanhLyVatTu_MaVatTu;
+        data["thanhLyVatTu_SoTienThanhLy"] = this.thanhLyVatTu_SoTienThanhLy;
+        data["thanhLyVatTu_SoLuong"] = this.thanhLyVatTu_SoLuong;
+        data["thanhLyVatTu_LyDo"] = this.thanhLyVatTu_LyDo;
+        data["thanhLyVatTu_NguoiTao"] = this.thanhLyVatTu_NguoiTao;
+        return data; 
+    }
+}
+
+export interface IGroup2VatTuSearchThanhLyInput {
+    thanhLyVatTu_Ma: number | undefined;
+    thanhLyVatTu_MaVatTu: number | undefined;
+    thanhLyVatTu_SoTienThanhLy: number | undefined;
+    thanhLyVatTu_SoLuong: number | undefined;
+    thanhLyVatTu_LyDo: string | undefined;
+    thanhLyVatTu_NguoiTao: string | undefined;
+}
+
+export class Group2VatTuSearchThanhLy implements IGroup2VatTuSearchThanhLy {
+    ma!: number | undefined;
+    thanhLyVatTu_MaVatTu!: number | undefined;
+    thanhLyVatTu_NgayThanhLy!: moment.Moment | undefined;
+    thanhLyVatTu_NgayTao!: moment.Moment | undefined;
+    thanhLyVatTu_NguoiTao!: string | undefined;
+    thanhLyVatTu_SoTienThanhLy!: number | undefined;
+    thanhLyVatTu_SoLuong!: number | undefined;
+    thanhLyVatTu_LyDo!: string | undefined;
+
+    constructor(data?: IGroup2VatTuSearchThanhLy) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.ma = data["ma"];
+            this.thanhLyVatTu_MaVatTu = data["thanhLyVatTu_MaVatTu"];
+            this.thanhLyVatTu_NgayThanhLy = data["thanhLyVatTu_NgayThanhLy"] ? moment(data["thanhLyVatTu_NgayThanhLy"].toString()) : <any>undefined;
+            this.thanhLyVatTu_NgayTao = data["thanhLyVatTu_NgayTao"] ? moment(data["thanhLyVatTu_NgayTao"].toString()) : <any>undefined;
+            this.thanhLyVatTu_NguoiTao = data["thanhLyVatTu_NguoiTao"];
+            this.thanhLyVatTu_SoTienThanhLy = data["thanhLyVatTu_SoTienThanhLy"];
+            this.thanhLyVatTu_SoLuong = data["thanhLyVatTu_SoLuong"];
+            this.thanhLyVatTu_LyDo = data["thanhLyVatTu_LyDo"];
+        }
+    }
+
+    static fromJS(data: any): Group2VatTuSearchThanhLy {
+        data = typeof data === 'object' ? data : {};
+        let result = new Group2VatTuSearchThanhLy();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["ma"] = this.ma;
+        data["thanhLyVatTu_MaVatTu"] = this.thanhLyVatTu_MaVatTu;
+        data["thanhLyVatTu_NgayThanhLy"] = this.thanhLyVatTu_NgayThanhLy ? this.thanhLyVatTu_NgayThanhLy.toISOString() : <any>undefined;
+        data["thanhLyVatTu_NgayTao"] = this.thanhLyVatTu_NgayTao ? this.thanhLyVatTu_NgayTao.toISOString() : <any>undefined;
+        data["thanhLyVatTu_NguoiTao"] = this.thanhLyVatTu_NguoiTao;
+        data["thanhLyVatTu_SoTienThanhLy"] = this.thanhLyVatTu_SoTienThanhLy;
+        data["thanhLyVatTu_SoLuong"] = this.thanhLyVatTu_SoLuong;
+        data["thanhLyVatTu_LyDo"] = this.thanhLyVatTu_LyDo;
+        return data; 
+    }
+}
+
+export interface IGroup2VatTuSearchThanhLy {
+    ma: number | undefined;
+    thanhLyVatTu_MaVatTu: number | undefined;
+    thanhLyVatTu_NgayThanhLy: moment.Moment | undefined;
+    thanhLyVatTu_NgayTao: moment.Moment | undefined;
+    thanhLyVatTu_NguoiTao: string | undefined;
+    thanhLyVatTu_SoTienThanhLy: number | undefined;
+    thanhLyVatTu_SoLuong: number | undefined;
+    thanhLyVatTu_LyDo: string | undefined;
 }
 
 export class Group3BangGiaDto implements IGroup3BangGiaDto {

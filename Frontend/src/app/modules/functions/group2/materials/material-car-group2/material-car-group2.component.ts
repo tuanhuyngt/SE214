@@ -5,6 +5,9 @@ import {
    Group5XeDto,
    Group2ThanhLyServiceProxy,
    Group2VatTuTheoXeSearchInput,
+   Group2VatTuTheoXeInsert,
+   Group2VatTuSearch,
+   Group2VatTuSearchInput,
 } from "./../../../../../../shared/service-proxies/service-proxies";
 import { Group5XeServiceProxy } from "@shared/service-proxies/service-proxies";
 import { Group2TaiXeServiceProxy } from "@shared/service-proxies/service-proxies";
@@ -19,7 +22,7 @@ import {
 import { AppComponentBase } from "@shared/common/app-component-base";
 import { Table } from "primeng/components/table/table";
 import { Paginator } from "primeng/primeng";
-import { result } from "lodash";
+import { result, indexOf } from "lodash";
 
 @Component({
    selector: "app-material-car-group2",
@@ -45,6 +48,7 @@ export class MaterialCarGroup2Component extends AppComponentBase
       this.carWithoutMaterialSearch();
       this.carWithMaterialSearch();
       this.modelCarSearch();
+      this.materialSearch();
    }
 
    ngAfterViewInit() {}
@@ -68,16 +72,6 @@ export class MaterialCarGroup2Component extends AppComponentBase
          }
       }
    }
-
-   carWithoutMaterial = new PrimengTableHelper();
-   carWithMaterial = new PrimengTableHelper();
-
-   //
-
-   // Init Dto Search
-   CarWithoutMI = new Group2VatTuTheoXeSearchInput();
-   CarWithMI = new Group2VatTuTheoXeSearchInput();
-
    modelCarSearch() {
       this._Group4LoaiXeServiceProxy
          .lOAIXE_Group4Search(this.modelCarSearchDto)
@@ -88,6 +82,73 @@ export class MaterialCarGroup2Component extends AppComponentBase
                this.modelCarList = result;
             }
          });
+   }
+
+   //Init Data Material
+   materialSearchDto = new Group2VatTuSearchInput();
+   materialList: Group2VatTuSearch[];
+   material = new Group2VatTuSearch();
+   filteredMaterial: any[];
+
+   onChangeMaterial() {
+      console.log(this.material);
+   }
+
+   materialSearch() {
+      this._Group2VatTuServiceProxy
+         .vATTU_Group2Search(this.materialSearchDto)
+         .subscribe((result) => {
+            if (result["result"] === "-1")
+               this.notify.error(result["ErrorDesc"]);
+            else {
+               this.materialList = result;
+               console.log(this.materialList);
+            }
+         });
+   }
+   filterMaterial(event) {
+      this.filteredMaterial = [];
+      for (let i = 0; i < this.materialList.length; i++) {
+         let mat = this.materialList[i];
+         if (
+            mat.vatTu_Ten.toLowerCase().indexOf(event.query.toLowerCase()) == 0
+         ) {
+            this.filteredMaterial.push(mat);
+         }
+      }
+   }
+
+   carWithoutMaterial = new PrimengTableHelper();
+   carWithMaterial = new PrimengTableHelper();
+   //
+
+   // Init Dto Search
+   CarWithoutMI = new Group2VatTuTheoXeSearchInput();
+   CarWithMI = new Group2VatTuTheoXeSearchInput();
+
+   // Init Dto Add
+
+   MaterialCarInsert = new Group2VatTuTheoXeInsert();
+
+   onClickAdd(int) {
+      if (!this.material.ma) {
+         this.notify.error("Vui lòng chọn vật tư");
+      } else {
+         this.MaterialCarInsert.vatTuTheoXe_MaXe = int;
+         this.MaterialCarInsert.vatTuTheoXe_MaVatTu = this.material.ma;
+         console.log(this.MaterialCarInsert);
+      }
+      this._Group2VatTuServiceProxy.vATTUTHEOXE_Group2Insert(this.MaterialCarInsert)
+      .subscribe((result) => {
+         if (result["result"] == "-1") {
+            this.notify.error(result["ErrorDesc"]);
+         } else {
+            this.notify.success("Thêm thành công");
+            delete this.MaterialCarInsert.vatTuTheoXe_MaXe;
+         };
+         this.carWithoutMaterialSearch();
+         this.carWithMaterialSearch();
+      });
    }
 
    carWithoutMaterialSearch() {

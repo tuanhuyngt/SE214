@@ -56,19 +56,19 @@
 
    <div class="group-2 m-portlet m-portlet-mobile">
       <div class="m-portlet__body">
-         <form #filterForm="ngForm" (submit)="search()">
+         <form #filterForm="ngForm" (submit)="onChangeMaterial()">
             <div class="row">
                <div class="col-md-6">
                   <label for="vatTu_TenVatTu">Tên vật tư</label>
                   <div class="form-group">
                      <p-autoComplete
-                        [(ngModel)]="license"
-                        name="license"
-                        [suggestions]="filteredLicenses"
-                        (completeMethod)="filterLicenses($event)"
+                        [(ngModel)]="material"
+                        name="material_name"
+                        [suggestions]="filteredMaterial"
+                        (completeMethod)="filterMaterial($event)"
+                        field = "vatTu_Ten"
                         [size]="40"
-                        (onSelect)="onChangeSearch()"
-                        (onClear)="onClearLicense()"
+                        (onSelect)="onChangeMaterial()"
                         placeholder="Chọn"
                         [dropdown]="false"
                      >
@@ -80,15 +80,14 @@
                   <label for="">Mã vật tư</label>
                   <div class="form-group">
                      <p-autoComplete
-                        [(ngModel)]="license"
-                        name="license"
-                        [suggestions]="filteredLicenses"
-                        (completeMethod)="filterLicenses($event)"
+                        [(ngModel)]="material"
+                        name="material"
+                        [suggestions]="filteredMaterial"
+                        (completeMethod)="filterMaterial($event)"
+                        field = "ma"
                         [size]="20"
-                        (onSelect)="onChangeSearch()"
-                        (onClear)="onClearLicense()"
                         placeholder="Chọn"
-                        [dropdown]="false"
+                        [dropdown]="true"
                      >
                      </p-autoComplete>
                   </div>
@@ -214,7 +213,7 @@
                                  <span>{{ record.xe_BienSo }}</span>
                               </td>
                               <td style="text-align: center;">
-                                 <a (click)="onclick()">
+                                 <a (click)="onClickAdd(record.ma)" style="cursor: pointer;">
                                     <i
                                        class="pi pi-plus"
                                        style="font-size: 1em;"
@@ -348,7 +347,7 @@
                                  <span>{{ record.xe_BienSo }}</span>
                               </td>
                               <td style="text-align: center;">
-                                 <span (click)="onclick()">
+                                 <span (click)="onClickDel()" style="cursor: pointer;">
                                     <i
                                        class="pi pi-times"
                                        style="font-size: 1em;"
