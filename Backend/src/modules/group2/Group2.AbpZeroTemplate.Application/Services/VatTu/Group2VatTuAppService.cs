@@ -19,6 +19,7 @@ namespace Group2.AbpZeroTemplate.Web.Core.Cars
         List<Group2VatTuTheoXeSearch> VATTUTHEOXE_Group2SearchInUse(Group2VatTuTheoXeSearchInput input);
         IDictionary<string, object> VATTUTHEOXE_Group2Insert(Group2VatTuTheoXeInsert input);
         IDictionary<string, object> VATTUTHEOXE_Group2Update(Group2VatTuTheoXeUpdate input);
+        IDictionary<string, object> VATTUTHEOXE_Group2Del(int Ma);
         IDictionary<string, object> VATTU_Group2Insert(Group2VatTuInsertInput input);
         IDictionary<string, object> VATTU_Group2Update(Group2VatTuUpdateInput input);
         List<Group2VatTuSearch> VATTU_Group2Search(Group2VatTuSearchInput input);
@@ -48,6 +49,10 @@ namespace Group2.AbpZeroTemplate.Web.Core.Cars
         public IDictionary<string, object> VATTUTHEOXE_Group2Update(Group2VatTuTheoXeUpdate input)
         {
             return procedureHelper.GetData<dynamic>("VATTUTHEOXE_Group2Update", input).FirstOrDefault();
+        }
+        public IDictionary<string, object> VATTUTHEOXE_Group2Del(int Ma)
+        {
+            return procedureHelper.GetData<dynamic>("VATTUTHEOXE_Group2Del", new { Ma = Ma }).FirstOrDefault();
         }
         public IDictionary<string, object> VATTU_Group2Insert(Group2VatTuInsertInput input)
         {
