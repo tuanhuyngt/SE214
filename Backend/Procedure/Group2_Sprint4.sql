@@ -182,7 +182,8 @@ go
 -- Search VatTu Theo Xe
 create or alter proc VATTUTHEOXE_Group2Search
 @Xe_MaLoaiXe int = null,
-@Xe_BienSo nvarchar(50) = null
+@Xe_BienSo nvarchar(50) = null,
+@VatTu_Ma int = null
 
 as
 begin
@@ -192,13 +193,14 @@ begin
 	where
 	(@Xe_MaLoaiXe is null or @Xe_MaLoaiXe = '' or @Xe_MaLoaiXe = X.Xe_MaLoaiXe) and
 	(@Xe_BienSo is null or @Xe_BienSo = '' or X.Xe_BienSo like '%' + @Xe_BienSo + '%') and
-	(VTTX.VatTuTheoXe_TrangThai = 'N')
+	(VTTX.VatTuTheoXe_TrangThai = 'N') and (VTTX.VatTuTheoXe_MaVatTu = @VatTu_Ma)
 end
 Go
 -- Search VatTu Theo Xe in Use
 create or alter proc VATTUTHEOXE_Group2SearchInUse
 @Xe_MaLoaiXe int = null,
-@Xe_BienSo nvarchar(50) = null
+@Xe_BienSo nvarchar(50) = null,
+@VatTu_Ma int = null
 
 as
 begin
@@ -206,13 +208,14 @@ begin
 	from Xe x JOIN LoaiXe LX
 	on x.Xe_MaLoaiXe = LX.Ma
 	WHERE x.Ma NOT IN (
-        SELECT VTTX.Ma
+        SELECT VTTX.VatTuTheoXe_MaXe
         FROM VatTuTheoXe VTTX
         WHERE VTTX.VatTuTheoXe_TrangThai = 'N'
+        AND (VTTX.VatTuTheoXe_MaVatTu = @VatTu_Ma)
     )
     AND 
     (@Xe_MaLoaiXe is null or @Xe_MaLoaiXe = '' or @Xe_MaLoaiXe = X.Xe_MaLoaiXe) and
-	(@Xe_BienSo is null or @Xe_BienSo = '' or X.Xe_BienSo like '%' + @Xe_BienSo + '%')
+	(@Xe_BienSo is null or @Xe_BienSo = '' or X.Xe_BienSo like '%' + @Xe_BienSo + '%')  
 end
 Go
 --Them VatTu Theo Xe
@@ -259,15 +262,16 @@ end catch
 go
 --Del VatTu Theo Xe
 CREATE or alter Proc VATTUTHEOXE_Group2Del
-@Ma int = null
+@Xe_Ma int = null,
+@VatTu_Ma int = null
 as
 begin transaction
 begin try
 	update VatTuTheoXe
 	set VatTuTheoXe_TrangThai = 'X'
-	where Ma = @Ma
+	where (VatTuTheoXe_MaXe = @Xe_Ma) and (VatTuTheoXe_MaVatTu = @VatTu_Ma)
 commit transaction
-	select '0' as Result, N'Cập nhật thông tin thành công' as ErrorDesc, @Ma as Ma
+	select '0' as Result, N'Cập nhật thông tin thành công' as ErrorDesc
 end try
 begin catch
 rollback transaction
