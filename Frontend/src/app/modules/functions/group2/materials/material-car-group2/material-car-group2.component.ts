@@ -2,15 +2,12 @@ import { PrimengTableHelper } from "./../../../../../../shared/helpers/PrimengTa
 import {
    Group4LoaiXeServiceProxy,
    Group4LoaiXeDto,
-   Group5XeDto,
-   Group2ThanhLyServiceProxy,
    Group2VatTuTheoXeSearchInput,
    Group2VatTuTheoXeInsert,
    Group2VatTuSearch,
    Group2VatTuSearchInput,
+   Group2VatTuTheoXeDelete,
 } from "./../../../../../../shared/service-proxies/service-proxies";
-import { Group5XeServiceProxy } from "@shared/service-proxies/service-proxies";
-import { Group2TaiXeServiceProxy } from "@shared/service-proxies/service-proxies";
 import { Group2VatTuServiceProxy } from "@shared/service-proxies/service-proxies";
 import {
    Component,
@@ -22,7 +19,6 @@ import {
 import { AppComponentBase } from "@shared/common/app-component-base";
 import { Table } from "primeng/components/table/table";
 import { Paginator } from "primeng/primeng";
-import { result, indexOf } from "lodash";
 
 @Component({
    selector: "app-material-car-group2",
@@ -36,9 +32,7 @@ export class MaterialCarGroup2Component extends AppComponentBase
    @ViewChild("paginator") paginator: Paginator;
    constructor(
       injector: Injector,
-      private _Group5XeServiceProxy: Group5XeServiceProxy,
       private _Group4LoaiXeServiceProxy: Group4LoaiXeServiceProxy,
-      private _Group2TaiXeServiceProxy: Group2TaiXeServiceProxy,
       private _Group2VatTuServiceProxy: Group2VatTuServiceProxy
    ) {
       super(injector);
@@ -91,7 +85,10 @@ export class MaterialCarGroup2Component extends AppComponentBase
    filteredMaterial: any[];
 
    onChangeMaterial() {
-      console.log(this.material);
+      this.CarWithMI.vatTu_Ma = this.material.ma;
+      this.CarWithoutMI.vatTu_Ma = this.material.ma;
+      this.carWithMaterialSearch();
+      this.carWithoutMaterialSearch();
    }
 
    materialSearch() {
@@ -102,7 +99,6 @@ export class MaterialCarGroup2Component extends AppComponentBase
                this.notify.error(result["ErrorDesc"]);
             else {
                this.materialList = result;
-               console.log(this.materialList);
             }
          });
    }
@@ -153,21 +149,25 @@ export class MaterialCarGroup2Component extends AppComponentBase
       }
    }
 
+   DeleteItem = new Group2VatTuTheoXeDelete();
+
    onClickDel(int) {
       if (!this.material.ma) {
          this.notify.error("Vui lòng chọn vật tư");
       } else {
+         this.DeleteItem.vatTu_Ma = this.material.ma;
+         this.DeleteItem.xe_Ma = int;
          this._Group2VatTuServiceProxy
-            .vATTUTHEOXE_Group2Del(int)
+            .vATTUTHEOXE_Group2Del(this.DeleteItem)
             .subscribe((result) => {
                if (result["Result"] == "-1") {
                   this.notify.error(result["ErrorDesc"]);
                } else {
                   this.notify.success("Xoá thành công");
                }
+               this.carWithoutMaterialSearch();
+               this.carWithMaterialSearch();
             });
-         this.carWithoutMaterialSearch();
-         this.carWithMaterialSearch();
       }
    }
 
@@ -180,7 +180,6 @@ export class MaterialCarGroup2Component extends AppComponentBase
             result.forEach((item) => {
                item["no"] = no++;
             });
-            result.length < 1 && this.notify.error("Không tìm thấy dữ liệu");
             this.carWithoutMaterial.totalRecordsCount = result.length;
             this.carWithoutMaterial.records = result;
             this.carWithMaterial.hideLoadingIndicator();
@@ -196,7 +195,6 @@ export class MaterialCarGroup2Component extends AppComponentBase
             result.forEach((item) => {
                item["no"] = no++;
             });
-            result.length < 1 && this.notify.error("Không tìm thấy dữ liệu");
             this.carWithMaterial.totalRecordsCount = result.length;
             this.carWithMaterial.records = result;
             this.carWithMaterial.hideLoadingIndicator();

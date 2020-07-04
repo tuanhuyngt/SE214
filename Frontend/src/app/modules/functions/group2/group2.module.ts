@@ -23,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { MaterialSubGroup2Component } from './materials/material-sub-group2/material-sub-group2.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     imports: [
@@ -38,7 +39,7 @@ import { MaterialSubGroup2Component } from './materials/material-sub-group2/mate
         InputTextModule,
         DialogModule,
         ButtonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
     declarations: [
         CarSubGroup2Component,
@@ -51,7 +52,7 @@ import { MaterialSubGroup2Component } from './materials/material-sub-group2/mate
         MaterialAddGroup2Component,
         MaterialEditGroup2Component,
         MaterialSubGroup2Component,
-        MaterialCarGroup2Component
+        MaterialCarGroup2Component,
     ],
     exports: [
         CarSubGroup2Component,

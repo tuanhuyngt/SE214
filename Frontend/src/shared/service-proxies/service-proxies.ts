@@ -4200,16 +4200,17 @@ export class Group2VatTuServiceProxy {
     }
 
     /**
-     * @ma (optional) 
+     * @input (optional) 
      * @return Success
      */
-    vATTUTHEOXE_Group2Del(ma: number | null | undefined): Observable<{ [key: string] : any; }> {
-        let url_ = this.baseUrl + "/api/Group2VatTu/VATTUTHEOXE_Group2Del?";
-        if (ma !== undefined)
-            url_ += "Ma=" + encodeURIComponent("" + ma) + "&"; 
+    vATTUTHEOXE_Group2Del(input: Group2VatTuTheoXeDelete | null | undefined): Observable<{ [key: string] : any; }> {
+        let url_ = this.baseUrl + "/api/Group2VatTu/VATTUTHEOXE_Group2Del";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(input);
+
         let options_ : any = {
+            body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
@@ -15694,6 +15695,7 @@ export interface IGroup2ThanhLyDto {
 export class Group2VatTuTheoXeSearchInput implements IGroup2VatTuTheoXeSearchInput {
     xe_MaLoaiXe!: number | undefined;
     xe_BienSo!: string | undefined;
+    vatTu_Ma!: number | undefined;
 
     constructor(data?: IGroup2VatTuTheoXeSearchInput) {
         if (data) {
@@ -15708,6 +15710,7 @@ export class Group2VatTuTheoXeSearchInput implements IGroup2VatTuTheoXeSearchInp
         if (data) {
             this.xe_MaLoaiXe = data["xe_MaLoaiXe"];
             this.xe_BienSo = data["xe_BienSo"];
+            this.vatTu_Ma = data["vatTu_Ma"];
         }
     }
 
@@ -15722,6 +15725,7 @@ export class Group2VatTuTheoXeSearchInput implements IGroup2VatTuTheoXeSearchInp
         data = typeof data === 'object' ? data : {};
         data["xe_MaLoaiXe"] = this.xe_MaLoaiXe;
         data["xe_BienSo"] = this.xe_BienSo;
+        data["vatTu_Ma"] = this.vatTu_Ma;
         return data; 
     }
 }
@@ -15729,6 +15733,7 @@ export class Group2VatTuTheoXeSearchInput implements IGroup2VatTuTheoXeSearchInp
 export interface IGroup2VatTuTheoXeSearchInput {
     xe_MaLoaiXe: number | undefined;
     xe_BienSo: string | undefined;
+    vatTu_Ma: number | undefined;
 }
 
 export class Group2VatTuTheoXeSearch implements IGroup2VatTuTheoXeSearch {
@@ -15869,6 +15874,46 @@ export interface IGroup2VatTuTheoXeUpdate {
     vatTuTheoXe_Ma: number | undefined;
     vatTuTheoXe_MaVatTu: number | undefined;
     vatTuTheoXe_MaXe: number | undefined;
+}
+
+export class Group2VatTuTheoXeDelete implements IGroup2VatTuTheoXeDelete {
+    xe_Ma!: number | undefined;
+    vatTu_Ma!: number | undefined;
+
+    constructor(data?: IGroup2VatTuTheoXeDelete) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.xe_Ma = data["xe_Ma"];
+            this.vatTu_Ma = data["vatTu_Ma"];
+        }
+    }
+
+    static fromJS(data: any): Group2VatTuTheoXeDelete {
+        data = typeof data === 'object' ? data : {};
+        let result = new Group2VatTuTheoXeDelete();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["xe_Ma"] = this.xe_Ma;
+        data["vatTu_Ma"] = this.vatTu_Ma;
+        return data; 
+    }
+}
+
+export interface IGroup2VatTuTheoXeDelete {
+    xe_Ma: number | undefined;
+    vatTu_Ma: number | undefined;
 }
 
 export class Group2VatTuInsertInput implements IGroup2VatTuInsertInput {

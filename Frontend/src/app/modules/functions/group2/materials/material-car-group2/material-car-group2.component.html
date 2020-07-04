@@ -85,6 +85,7 @@
                         [suggestions]="filteredMaterial"
                         (completeMethod)="filterMaterial($event)"
                         field = "ma"
+                        (onSelect)="onChangeMaterial()"
                         [size]="20"
                         placeholder="Chọn"
                         [dropdown]="true"
