@@ -98,7 +98,7 @@ export class MaterialCarGroup2Component extends AppComponentBase
       this._Group2VatTuServiceProxy
          .vATTU_Group2Search(this.materialSearchDto)
          .subscribe((result) => {
-            if (result["result"] === "-1")
+            if (result["Result"] === "-1")
                this.notify.error(result["ErrorDesc"]);
             else {
                this.materialList = result;
@@ -137,18 +137,38 @@ export class MaterialCarGroup2Component extends AppComponentBase
          this.MaterialCarInsert.vatTuTheoXe_MaXe = int;
          this.MaterialCarInsert.vatTuTheoXe_MaVatTu = this.material.ma;
          console.log(this.MaterialCarInsert);
+
+         this._Group2VatTuServiceProxy
+            .vATTUTHEOXE_Group2Insert(this.MaterialCarInsert)
+            .subscribe((result) => {
+               if (result["Result"] == "-1") {
+                  this.notify.error(result["ErrorDesc"]);
+               } else {
+                  this.notify.success("Thêm thành công");
+                  delete this.MaterialCarInsert.vatTuTheoXe_MaXe;
+               }
+               this.carWithoutMaterialSearch();
+               this.carWithMaterialSearch();
+            });
       }
-      this._Group2VatTuServiceProxy.vATTUTHEOXE_Group2Insert(this.MaterialCarInsert)
-      .subscribe((result) => {
-         if (result["result"] == "-1") {
-            this.notify.error(result["ErrorDesc"]);
-         } else {
-            this.notify.success("Thêm thành công");
-            delete this.MaterialCarInsert.vatTuTheoXe_MaXe;
-         };
+   }
+
+   onClickDel(int) {
+      if (!this.material.ma) {
+         this.notify.error("Vui lòng chọn vật tư");
+      } else {
+         this._Group2VatTuServiceProxy
+            .vATTUTHEOXE_Group2Del(int)
+            .subscribe((result) => {
+               if (result["Result"] == "-1") {
+                  this.notify.error(result["ErrorDesc"]);
+               } else {
+                  this.notify.success("Xoá thành công");
+               }
+            });
          this.carWithoutMaterialSearch();
          this.carWithMaterialSearch();
-      });
+      }
    }
 
    carWithoutMaterialSearch() {
