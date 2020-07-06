@@ -137,7 +137,7 @@ begin try
 		@ThanhLyVatTu_LyDo)
 
 	update VatTu
-	set VatTu_SoLuong = VatTu_SoLuong - @ThanhLyVatTu_SoLuong
+	set VatTu_SoLuong = VatTu_SoLuong - @ThanhLyVatTu_SoLuong, VatTu_TongGia = VatTu_DonGia * VatTu_SoLuong
 	from VatTu VT inner join ThanhLyVatTu TLVT
 	on VT.Ma = TLVT.ThanhLyVatTu_MaVatTu 
 	where VT.Ma = @ThanhLyVatTu_MaVatTu
