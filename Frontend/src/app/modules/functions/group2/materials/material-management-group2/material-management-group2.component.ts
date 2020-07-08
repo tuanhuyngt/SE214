@@ -1,7 +1,7 @@
 import { environment } from 'environments/environment';
-import { Group2TaiXeSearchInputDto } from '@shared/service-proxies/service-proxies';
-import { Group2TaiXeServiceProxy } from '@shared/service-proxies/service-proxies';
-
+import { Group2VatTuSearchInput, Group2VatTuThanhLyInput } from '@shared/service-proxies/service-proxies';
+import { Group2VatTuServiceProxy } from '@shared/service-proxies/service-proxies';
+import { FormControl } from '@angular/forms';
 import {
     Component,
     ViewChild,
@@ -12,6 +12,7 @@ import {
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { Table } from "primeng/components/table/table";
 import { Paginator } from "primeng/primeng";
+import { Moment } from 'moment';
 
 @Component({
   selector: 'app-material-management-group2',
@@ -22,7 +23,7 @@ export class MaterialManagementGroup2Component extends AppComponentBase implemen
 
   @ViewChild("dataTable") dataTable: Table;
     @ViewChild("paginator") paginator: Paginator;
-    constructor(injector: Injector, private Group2TaiXeServiceProxy: Group2TaiXeServiceProxy) {
+    constructor(injector: Injector, private Group2VatTuServiceProxy: Group2VatTuServiceProxy) {
         super(injector);
         this.currentUserName = this.appSession.user.userName;
     }
@@ -34,9 +35,13 @@ export class MaterialManagementGroup2Component extends AppComponentBase implemen
         this.search();
     }
 
-    driverId: number;
-    driverName: string = '';
-    driverInput: Group2TaiXeSearchInputDto = new Group2TaiXeSearchInputDto();
+    addFormControl = new FormControl();
+
+
+    materialSearch :Group2VatTuSearchInput = new Group2VatTuSearchInput();
+    materialId: number;
+    materialName: string = '';
+    thanhlyvattu : Group2VatTuThanhLyInput = new Group2VatTuThanhLyInput();
 
     checkIndexOfOption(array, option) {
         const index = array.findIndex(elm => elm["value"] === option["value"]);
@@ -45,33 +50,36 @@ export class MaterialManagementGroup2Component extends AppComponentBase implemen
         }
     }
 
+    resetForm() {
+        this.addFormControl.reset();
+    }
+
+    finalConfirm() {
+        console.log(this.materialSearch);
+    }
+
+    cancelConfirm() {
+        this.materialSearch = new Group2VatTuSearchInput();
+    }
+
     onChangeSearch()
     {
-        this.driverInput.taiXe_HoTen = this.driverName;
+        this.materialSearch.vatTu_Ten = this. materialName;
         this.onSearch();
     }
-
-    resetOptions() {
-    }
-
-    clearOption(type) {
-    }
-
-
-    delete() {
+    deleteMaterial() {
         let self = this;
         self.message.confirm(
-            self.l('Xác nhận xóa tài xế', this.driverId),
+            self.l('Xác nhận xóa vật tư', this.materialId),
             this.l(''),
             isConfirmed => {
                 if (isConfirmed) {
-                    this.Group2TaiXeServiceProxy.tAIXE_Group2Del(this.driverId).subscribe((response) => {
+                    this.Group2VatTuServiceProxy.vATTU_Group2ThanhLy(this.thanhlyvattu).subscribe((response) => {
                         if (response["Result"] === "1") {
-                            this.notify.error("Xóa tài xế thất bại", "ERROR", environment.opt);
+                            this.notify.error("Xóa vật tư thất bại", "ERROR", environment.opt);
                         } else {
-                            this.notify.success("Xóa tài xế thành công", "SUCCESS", environment.opt);
-                            this.resetOptions();
-                            this.driverId = null;
+                            this.notify.success("Xóa vật tư thành công ", "SUCCESS", environment.opt);
+                            this.materialId = null;
                             this.search();
                         }
                     });
@@ -81,9 +89,9 @@ export class MaterialManagementGroup2Component extends AppComponentBase implemen
     }
    
     search() {
-        this.driverInput.taiXe_TrangThaiLamViec = 'D';
+        
         this.primengTableHelper.showLoadingIndicator();
-        this.Group2TaiXeServiceProxy.tAIXE_Group2Search(this.driverInput)
+        this.Group2VatTuServiceProxy.vATTU_Group2Search(this.materialSearch)
             .subscribe((result) => {
                 let no = 1;
                 result.forEach((item) => {
@@ -96,9 +104,8 @@ export class MaterialManagementGroup2Component extends AppComponentBase implemen
             });
     }
     onSearch() {
-        this.driverInput.taiXe_TrangThaiLamViec = 'D';
-        this.primengTableHelper.showLoadingIndicator();
-        this.Group2TaiXeServiceProxy.tAIXE_Group2Search(this.driverInput)
+        this.primengTableHelper.showLoadingIndicator();    
+        this.Group2VatTuServiceProxy.vATTU_Group2Search(this.materialSearch)
             .subscribe((result) => {
                 let no = 1;
                 result.forEach((item) => {
@@ -107,6 +114,10 @@ export class MaterialManagementGroup2Component extends AppComponentBase implemen
                 this.primengTableHelper.records = result;
                 this.primengTableHelper.hideLoadingIndicator();
             });
+    }
+
+    toDate(m : Moment) {
+        return m.format("YYYY-MM-DD");
     }
 
 }

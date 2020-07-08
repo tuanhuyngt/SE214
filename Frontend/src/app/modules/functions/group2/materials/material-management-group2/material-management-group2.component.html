@@ -4,18 +4,18 @@
             <div class="m-portlet__nav">
                 <ul>
                     <li>
-                        <a routerLink="/app/admin/driver-add">
+                        <a routerLink="/app/admin/material-add">
                             <i class="flaticon-add"></i>
                             Thêm mới
                         </a>
                     </li>
                     <li>
-                        <a routerLink="/app/admin/driver-edit">
+                        <a routerLink="/app/admin/material-edit">
                             <i class="flaticon-edit"></i> Chỉnh sửa
                         </a>
                     </li>
                     <li>
-                        <a routerLink="/app/admin/driver-search">
+                        <a routerLink="/app/admin/material-search">
                             <span>
                                 <i class="flaticon-search"></i>
                                 Tìm kiếm
@@ -23,9 +23,33 @@
                         </a>
                     </li>
                     <li>
-                        <span (click)="delete()" [class.disabled]="!driverId">
-                            <i class="flaticon-edit"></i> Xóa
+                        <span (click)="deleteMaterial()" [class.disabled]="!materialId">
+                            <i class="flaticon-circle"></i> Xóa vật tư
                         </span>
+                    </li>
+                    <li>
+                        <a routerLink="/app/admin/material-sub">
+                            <span>
+                                <i class="flaticon-edit"></i>
+                                Thanh lý
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/app/admin/material-delete">
+                            <span>
+                                <i class="flaticon-calendar"></i>                <!--Khỏi set , huy sẽ set sau-->
+                                lịch sử thanh lý
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/app/admin/material-car">
+                            <span>
+                                <i class="flaticon-info"></i>                       <!--Khỏi set , huy sẽ set sau-->
+                                Vật tư theo xe
+                            </span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -37,7 +61,7 @@
                         {{ l("Trang chủ") }}
                     </span>
                     <span class="m-section__sub m-section__sub--separator active">
-                        <a routerLink="/app/admin/driver">{{ l("Quản lý tài xế") }} {{ currentUserName }}</a>
+                        <a routerLink="/app/admin/material">{{ l("Quản lý vật tư") }} {{ currentUserName }}</a>
                     </span>
                 </div>
             </div>
@@ -46,14 +70,14 @@
 
     <div class="group-2 m-portlet m-portlet-mobile">
         <div class="m-portlet__body">
-            <form #filterForm="ngForm" (submit)="search()">
+            <form #filterForm="ngForm" (submit)="onChangeSearch()">
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="taiXe_HoTen">Tên tài xế</label>
+                        <label for="vatTu_Ten">Tên vật tư</label>
                         <div class="form-group">
-                            <input id="driver_search" class="ui-inputtext ui-widget ui-state-default form-control"
-                                type="text" name="driver_search" maxlength="20" [(ngModel)]="driverName"
-                                (ngModelChange)="onChangeSearch()" 
+                            <input id="material_search" class="ui-inputtext ui-widget ui-state-default form-control"
+                                type="text" name="material_search" maxlength="20" [(ngModel)]="materialName"
+                                
                                 pattern="[a-zA-Z ]*"
                                 />
                         </div>
@@ -76,20 +100,20 @@
                                 <th class="th-STT">
                                     STT
                                 </th>
-                                <th class="th-MaTaiXe">
-                                    Mã tài xế
+                                <th class="th-TenVatTu">
+                                    Tên vật tư
                                 </th>
-                                <th class="th-TenTaiXe">
-                                    Tên tài xế
+                                <th class="th-SoLuong">
+                                    Số lượng
                                 </th>
-                                <th class="th-HangBangLai">
-                                    Hạng bằng lái
+                                <th class="th-MoTa">
+                                    Mô tả
                                 </th>
-                                <th class="th-MucLuong">
-                                    Mức lương
+                                <th class="th-TongTriGia">
+                                    Tổng trị giá
                                 </th>
-                                <th class="th-TrangThai">
-                                    Trạng thái làm việc
+                                <th class="th-NgayThemVao">
+                                    Ngày thêm vào
                                 </th>
                             </tr>
                         </ng-template>
@@ -98,32 +122,33 @@
                             <tr>
                                 <td>
                                     <label class="m-radio" for="Theme_Default-{{ record.ma }}">
-                                        <input id="Theme_Default-{{ record.ma }}" name="Theme" [(ngModel)]="driverId"
+                                        <input id="Theme_Default-{{ record.ma }}" name="Theme" [(ngModel)]="materialId"
                                             value="{{ record.ma }}" type="radio" />
                                         <span></span>
                                     </label>
                                 </td>
-                                <td>
+                                <td style="text-align: center;">
                                     <span>{{ record["no"] }}</span>
                                 </td>
-                                <td>
-                                    <span>{{'TX00' + record.ma }}</span>
+                                <td class="td-TenVatTu">
+                                    <span>{{ record.vatTu_Ten }}</span>
                                 </td>
-                                <td>
-                                    <span>{{ record.taiXe_HoTen }}</span>
+                                <td style="text-align: center;" >
+                                    <span>{{ record.vatTu_SoLuong }}</span>
                                 </td>
-                                <td class="td-HangBangLai" >
-                                    <span>{{ record.taiXe_HangBangLai }}</span>
+                                <td class="td-MoTa" >
+                                    <span>{{ record.vatTu_MoTa }}</span>
                                 </td>
-                                <td>
+
+                                <td style="text-align: center;">
                                     <span [style.float] = "'right'" [style.padding-right.px]="'40'">{{
-                    record.hopDong_MucLuong | currency: "VND":true
-                  }}</span>
+                    record.vatTu_TongGia | currency: "VND":true  
+                   }}</span>                  
                                 </td>
-                                <td>
-                                    <span>{{
-                    record.taiXe_TrangThaiLamViec == "D" ? "Làm việc" : "Nghỉ"
-                  }}</span>
+                                <td style="text-align: center;">
+                                    <span >{{
+                    toDate(record.vatTu_NgayTao) 
+                   }}</span>                  
                                 </td>
                             </tr>
                         </ng-template>
