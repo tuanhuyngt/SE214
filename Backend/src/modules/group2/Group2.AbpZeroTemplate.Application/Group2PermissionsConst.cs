@@ -17,5 +17,15 @@ namespace Group2.AbpZeroTemplate.Application
     public const string Pages_Administration_Group2TaiXe_QuickUpdate = "Pages.Group2.Group2TaiXe.QuickUpdate";
     public const string Pages_Administration_Group2TaiXe_Search = "Pages.Group2.Group2TaiXe.Search";
     public const string Pages_Administration_Group2TaiXe_Delete = "Pages.Group2.Group2TaiXe.Delete";
-  }
+
+    public const string Pages_Administration_Group2VatTu = "Pages.Group2.Group2VatTu";
+        public const string Pages_Administration_Group2VatTu_Insert = "Pages.Group2.Group2VatTu.Insert";
+        public const string Pages_Administration_Group2VatTu_Update = "Pages.Group2.Group2VatTu.Update";
+        public const string Pages_Administration_Group2VatTu_Search = "Pages.Group2.Group2VatTu.Search";
+        public const string Pages_Administration_Group2VatTu_Delete = "Pages.Group2.Group2VatTu.Delete";
+        public const string Pages_Administration_Group2VatTuTheoXe_Search = "Pages.Group2.Group2VatTuTheoXe.Search";
+        public const string Pages_Administration_Group2VatTuTheoXe_Insert = "Pages.Group2.Group2VatTuTheoXe.Insert";
+        public const string Pages_Administration_Group2VatTuTheoXe_Update = "Pages.Group2.Group2VatTuTheoXe.Update";
+        public const string Pages_Administration_Group2VatTuTheoXe_Delete = "Pages.Group2.Group2VatTuTheoXe.Delete";
+    }
 }

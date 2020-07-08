@@ -36,7 +36,17 @@ namespace Group2.AbpZeroTemplate.Application
       group2TaiXe.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2TaiXe_Delete, L("Delete"));
       group2TaiXe.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2TaiXe_Update, L("Update"));
       group2TaiXe.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2TaiXe_QuickUpdate, L("Quick Update"));
-    }
+
+      var group2VatTu = pages.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2VatTu, L("Group2VatTu"));
+            group2VatTu.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2VatTu_Insert, L("Insert"));
+            group2VatTu.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2VatTu_Search, L("Search"));
+            group2VatTu.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2VatTu_Delete, L("Delete"));
+            group2VatTu.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2VatTu_Update, L("Update"));
+            group2VatTu.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2VatTuTheoXe_Insert, L("VatTuTheoXe_Insert"));
+            group2VatTu.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2VatTuTheoXe_Search, L("VatTuTheoXe_Search"));
+            group2VatTu.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2VatTuTheoXe_Update, L("VatTuTheoXe_Update"));
+            group2VatTu.CreateChildPermission(Group2PermissionsConst.Pages_Administration_Group2VatTuTheoXe_Delete, L("VatTuTheoXe_Delete"));
+        }
 
     private static ILocalizableString L(string name)
     {
