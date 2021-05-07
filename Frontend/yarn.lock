@@ -1470,7 +1470,7 @@ compressible@~2.0.13:
 
 compression@^1.5.2:
   version "1.7.2"
-  resolved "http://registry.npmjs.org/compression/-/compression-1.7.2.tgz#aaffbcd6aaf854b44ebb280353d5ad1651f59a69"
+  resolved "https://registry.npmjs.org/compression/-/compression-1.7.2.tgz#aaffbcd6aaf854b44ebb280353d5ad1651f59a69"
   dependencies:
     accepts "~1.3.4"
     bytes "3.0.0"
@@ -5440,6 +5440,10 @@ pretty-error@^2.0.2:
     renderkid "^2.0.1"
     utila "~0.4"
 
+primeflex@^1.3.0:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/primeflex/-/primeflex-1.3.1.tgz#60eee9d636112b79addd85c173e8637cc9898557"
+
 primeicons@1.0.0-beta.9:
   version "1.0.0-beta.9"
   resolved "https://registry.yarnpkg.com/primeicons/-/primeicons-1.0.0-beta.9.tgz#e2fe9d586809e0fe0b9ee6109784e5340a1c3f05"
@@ -7042,9 +7046,9 @@ ultron@1.0.x:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/ultron/-/ultron-1.0.2.tgz#ace116ab557cd197386a4e88f4685378c8b2e4fa"
 
-underscore@^1.8.3:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.9.0.tgz#31dbb314cfcc88f169cd3692d9149d81a00a73e4"
+underscore@^1.12.1:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.12.1.tgz#7bb8cc9b3d397e201cf8553336d262544ead829e"
 
 union-value@^1.0.0:
   version "1.0.0"
